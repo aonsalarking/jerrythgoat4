@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐐 JERRY IS THE GOAT 🐐</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+overflow:hidden;
+height:100vh;
+background:linear-gradient(135deg,#09091f,#1d0b52,#4b0082,#0d5eff);
+background-size:400% 400%;
+animation:bg 12s infinite alternate;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+@keyframes bg{
+0%{background-position:left;}
+100%{background-position:right;}
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:0;
+}
+
+.card{
+position:relative;
+z-index:2;
+padding:50px;
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(15px);
+border-radius:30px;
+text-align:center;
+box-shadow:0 0 50px cyan;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+50%{transform:translateY(-15px);}
+}
+
+h1{
+font-size:70px;
+background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);
+background-size:300%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:rainbow 5s linear infinite;
+}
+
+@keyframes rainbow{
+100%{background-position:300%;}
+}
+
+p{
+color:white;
+font-size:22px;
+margin:20px;
+}
+
+button{
+padding:20px 40px;
+font-size:22px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+background:linear-gradient(90deg,#ff00ff,#00ffff);
+color:white;
+font-weight:bold;
+transition:.3s;
+box-shadow:0 0 20px cyan;
+}
+
+button:hover{
+transform:scale(1.1) rotate(-2deg);
+box-shadow:0 0 60px white;
+}
+
+.score{
+font-size:35px;
+margin-top:25px;
+color:white;
+}
+
+.goat{
+position:absolute;
+font-size:40px;
+pointer-events:none;
+animation:fly 5s linear forwards;
+}
+
+@keyframes fly{
+0%{
+transform:translateY(120vh) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(720deg);
+opacity:0;
+}
+}
+
+.spark{
+position:absolute;
+width:8px;
+height:8px;
+border-radius:50%;
+background:white;
+pointer-events:none;
+animation:spark .8s linear forwards;
+}
+
+@keyframes spark{
+100%{
+transform:translate(var(--x),var(--y));
+opacity:0;
+}
+}
+
+.cursor{
+position:fixed;
+width:20px;
+height:20px;
+background:white;
+border-radius:50%;
+pointer-events:none;
+mix-blend-mode:difference;
+transform:translate(-50%,-50%);
+z-index:9999;
+box-shadow:0 0 25px white;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="cursor" id="cursor"></div>
+
+<div class="card">
+<h1>🐐 JERRY IS THE GOAT 🐐</h1>
+
+<p>Welcome to the greatest website ever created.</p>
+
+<button onclick="power()">
+🔥 UNLEASH JERRY POWER 🔥
+</button>
+
+<div class="score">
+Power Level:
+<span id="score">0</span>
+</div>
+
+</div>
+
+<script>
+
+const cursor=document.getElementById("cursor");
+
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let stars=[];
+
+for(let i=0;i<250;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+s:Math.random()*2+1
+});
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="white";
+
+for(let s of stars){
+
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,6.28);
+ctx.fill();
+
+s.y+=s.s;
+
+if(s.y>canvas.height){
+s.y=0;
+s.x=Math.random()*canvas.width;
+}
+
+}
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+
+let score=0;
+
+function power(){
+
+score++;
+
+document.getElementById("score").textContent=score;
+
+for(let i=0;i<30;i++){
+
+let goat=document.createElement("div");
+
+goat.className="goat";
+
+goat.innerHTML=["🐐","⭐","🔥","⚡","✨","💥"][Math.floor(Math.random()*6)];
+
+goat.style.left=Math.random()*window.innerWidth+"px";
+
+document.body.appendChild(goat);
+
+setTimeout(()=>goat.remove(),5000);
+
+}
+
+document.body.style.boxShadow="0 0 200px white inset";
+
+setTimeout(()=>{
+document.body.style.boxShadow="";
+},200);
+
+}
+
+document.addEventListener("click",e=>{
+
+for(let i=0;i<40;i++){
+
+let spark=document.createElement("div");
+
+spark.className="spark";
+
+spark.style.left=e.clientX+"px";
+
+spark.style.top=e.clientY+"px";
+
+spark.style.setProperty("--x",(Math.random()-0.5)*300+"px");
+
+spark.style.setProperty("--y",(Math.random()-0.5)*300+"px");
+
+spark.style.background=`hsl(${Math.random()*360},100%,70%)`;
+
+document.body.appendChild(spark);
+
+setTimeout(()=>spark.remove(),800);
+
+}
+
+});
+
+window.onresize=()=>{
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+};
+
+</script>
+
+</body>
+</html>
