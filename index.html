@@ -2,389 +2,1843 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐐 JERRY IS THE GOAT 🐐</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#060B1A">
+<title>Stars Academy — Where Dreams Become Achievements</title>
+<meta name="description" content="Stars Academy is a Pakistani academic institution offering Matriculation, Intermediate, O-Level, A-Level and Entry Test Preparation programs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   0. TOKENS & RESET
+   ========================================================= */
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 
-<style
+  /* --- base palette --- */
+  --navy-950:#060B1A;
+  --navy-900:#0B1730;
+  --navy-800:#12234A;
+  --navy-700:#1B3364;
+  --royal-600:#1F4E8C;
+  --royal-500:#2C63AD;
+  --gold-600:#B4881B;
+  --gold-500:#C9A227;
+  --gold-300:#E4C567;
+  --gold-200:#EFDA9E;
+  --paper-0:#FFFFFF;
+  --paper-50:#F6F8FC;
+  --paper-100:#EDF1F9;
+  --ink-900:#0B1220;
+  --ink-700:#3B4763;
+  --ink-500:#647092;
+  --line:#DEE4F0;
 
+  /* --- semantic (light default) --- */
+  --bg:var(--paper-50);
+  --bg-elevated:var(--paper-0);
+  --text:var(--ink-900);
+  --text-muted:var(--ink-700);
+  --text-soft:var(--ink-500);
+  --border:var(--line);
+  --nav-bg:rgba(255,255,255,.72);
+  --card-bg:var(--paper-0);
+  --shadow-1:0 1px 2px rgba(11,18,32,.06), 0 8px 24px -12px rgba(11,18,32,.12);
+  --shadow-2:0 12px 32px -12px rgba(11,18,32,.22);
 
-html{
-    -webkit-text-size-adjust:100%;
+  --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-urdu:'Noto Nastaliq Urdu', serif;
+
+  --nav-h:84px;
+  --container:1200px;
 }
 
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--navy-950);
+    --bg-elevated:var(--navy-900);
+    --text:#EEF2FB;
+    --text-muted:#AEB9D4;
+    --text-soft:#8892AD;
+    --border:rgba(228,197,103,.16);
+    --nav-bg:rgba(6,11,26,.68);
+    --card-bg:var(--navy-900);
+    --shadow-1:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.5);
+    --shadow-2:0 16px 40px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:var(--navy-950);
+  --bg-elevated:var(--navy-900);
+  --text:#EEF2FB;
+  --text-muted:#AEB9D4;
+  --text-soft:#8892AD;
+  --border:rgba(228,197,103,.16);
+  --nav-bg:rgba(6,11,26,.68);
+  --card-bg:var(--navy-900);
+  --shadow-1:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.5);
+  --shadow-2:0 16px 40px -14px rgba(0,0,0,.6);
+}
+
+*,*::before,*::after{box-sizing:inherit; margin:0; padding:0;}
+html{scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + 12px + env(safe-area-inset-top,0px));}
 body{
-    padding:20px;
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background-color .4s ease, color .4s ease;
+}
+body.no-scroll{overflow:hidden; height:100%;}
+img,svg{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+ul{list-style:none;}
+button,input,select,textarea{font:inherit; color:inherit;}
+button{cursor:pointer; background:none; border:none;}
+:focus-visible{outline:2px solid var(--gold-500); outline-offset:3px; border-radius:4px;}
+.visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+
+.reduce-motion, .reduce-motion *{
+  animation-duration:.001ms !important;
+  animation-iteration-count:1 !important;
+  transition-duration:.001ms !important;
+  scroll-behavior:auto !important;
 }
 
-.card{
-    width:min(90vw,700px);
-    padding:40px 25px;
+.skip-link{
+  position:fixed; top:-100%; left:1rem; z-index:9999;
+  background:var(--gold-500); color:var(--navy-950); font-weight:700;
+  padding:.75rem 1.25rem; border-radius:0 0 .5rem .5rem; transition:top .25s ease;
+}
+.skip-link:focus{top:0;}
+
+.container{width:min(var(--container), 100% - 3rem); margin-inline:auto;}
+@media (max-width:640px){.container{width:min(var(--container), 100% - 2.5rem);}}
+
+.section{padding:clamp(3.5rem, 6vw, 6.5rem) 0;}
+.section-dark{background:var(--navy-950); color:#EEF2FB; position:relative; overflow:hidden;}
+.section-dark .text-muted{color:#AEB9D4;}
+
+.eyebrow-mark{
+  display:inline-flex; align-items:center; gap:.5rem;
+  color:var(--gold-600); font-weight:700; font-size:.95rem; margin-bottom:.6rem;
+}
+:root[data-theme="dark"] .eyebrow-mark, .section-dark .eyebrow-mark{color:var(--gold-300);}
+.eyebrow-mark svg{width:16px; height:16px;}
+
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; line-height:1.12; letter-spacing:-.01em;}
+h2{font-size:clamp(2rem, 1.55rem + 1.9vw, 2.85rem); margin-bottom:.85rem;}
+h3{font-size:clamp(1.3rem, 1.15rem + .7vw, 1.65rem);}
+p{color:var(--text-muted);}
+.lede{font-size:clamp(1.05rem, 1vw + .9rem, 1.2rem); max-width:62ch; color:var(--text-muted);}
+.section-head{max-width:640px; margin-bottom:clamp(2.25rem, 4vw, 3.25rem);}
+.section-head.center{margin-inline:auto; text-align:center;}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn{
+  position:relative; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; gap:.55rem;
+  padding:.9rem 1.7rem; border-radius:999px; font-weight:700; font-size:.98rem;
+  transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease, color .25s ease;
+  white-space:nowrap;
+}
+.btn:active{transform:translateY(1px) scale(.98);}
+.btn-gold{background:linear-gradient(135deg, var(--gold-300), var(--gold-600)); color:#241A02; box-shadow:0 10px 30px -10px rgba(201,162,39,.55);}
+.btn-gold:hover{transform:translateY(-2px); box-shadow:0 16px 34px -10px rgba(201,162,39,.65);}
+.btn-outline{border:1.5px solid rgba(255,255,255,.45); color:#fff; background:rgba(255,255,255,.06); backdrop-filter:blur(6px);}
+.btn-outline:hover{background:rgba(255,255,255,.14); transform:translateY(-2px);}
+.btn-navy{background:var(--navy-900); color:#fff;}
+.btn-navy:hover{background:var(--navy-800); transform:translateY(-2px);}
+.btn-ghost{border:1.5px solid var(--border); color:var(--text);}
+.btn-ghost:hover{border-color:var(--gold-500); color:var(--gold-600);}
+.btn-sm{padding:.6rem 1.15rem; font-size:.88rem;}
+.btn-block{width:100%;}
+.ripple{position:absolute; border-radius:50%; background:rgba(255,255,255,.55); transform:scale(0); animation:rippleAnim .6s ease-out; pointer-events:none;}
+@keyframes rippleAnim{to{transform:scale(1); opacity:0;}}
+
+/* =========================================================
+   1. LOADER
+   ========================================================= */
+.loader{
+  position:fixed; inset:0; z-index:10000; background:var(--navy-950);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+.loader.is-hidden{opacity:0; visibility:hidden; pointer-events:none;}
+.loader-mark{width:56px; height:56px; color:var(--gold-400,#E4C567); animation:loaderPulse 1.4s ease-in-out infinite;}
+@keyframes loaderPulse{0%,100%{transform:scale(1); opacity:.7;} 50%{transform:scale(1.15); opacity:1;}}
+.loader-text{color:#AEB9D4; font-size:.85rem; letter-spacing:.08em;}
+
+/* =========================================================
+   2. NAVBAR
+   ========================================================= */
+.navbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:1000;
+  height:var(--nav-h);
+  display:flex; align-items:center;
+  background:transparent;
+  transition:background-color .35s ease, height .35s ease, box-shadow .35s ease, backdrop-filter .35s ease;
+}
+.navbar.is-scrolled{
+  height:66px; background:var(--nav-bg); backdrop-filter:blur(16px) saturate(140%);
+  box-shadow:0 1px 0 var(--border), 0 12px 30px -18px rgba(6,11,26,.3);
+}
+.nav-inner{display:flex; align-items:center; justify-content:space-between; gap:1rem;}
+.brand{display:flex; align-items:center; gap:.6rem; font-family:var(--font-display); font-weight:600; font-size:1.2rem;}
+.brand-mark{width:34px; height:34px; flex:none;}
+.brand-word b{color:var(--gold-600); font-weight:600;}
+:root[data-theme="dark"] .brand-word, .navbar.is-scrolled[data-scrolled-dark] .brand-word{color:#fff;}
+
+.nav-links{display:flex; align-items:center; gap:1.9rem;}
+.nav-link{
+  position:relative; font-weight:600; font-size:.93rem; color:var(--text-muted); padding:.3rem 0;
+  transition:color .2s ease;
+}
+.nav-link::after{
+  content:''; position:absolute; left:0; right:100%; bottom:-4px; height:2px; background:var(--gold-500);
+  transition:right .28s ease;
+}
+.nav-link:hover, .nav-link.is-active{color:var(--text);}
+.nav-link.is-active::after, .nav-link:hover::after{right:0;}
+
+.nav-actions{display:flex; align-items:center; gap:.6rem;}
+.icon-btn{
+  width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid var(--border); color:var(--text); transition:border-color .2s ease, background-color .2s ease, transform .2s ease;
+  flex:none;
+}
+.icon-btn:hover{border-color:var(--gold-500); transform:translateY(-1px);}
+.icon-btn svg{width:19px; height:19px;}
+.theme-toggle .sun{display:none;}
+:root[data-theme="dark"] .theme-toggle .moon{display:none;}
+:root[data-theme="dark"] .theme-toggle .sun{display:block;}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .theme-toggle .moon{display:none;}
+  :root:not([data-theme="light"]) .theme-toggle .sun{display:block;}
 }
 
-h1{
-    font-size:clamp(2rem,8vw,5rem);
-    line-height:1.1;
-    word-wrap:break-word;
+.hamburger{display:none; width:42px; height:42px; border-radius:50%; border:1px solid var(--border); align-items:center; justify-content:center; position:relative;}
+.hamburger span, .hamburger span::before, .hamburger span::after{
+  content:''; display:block; width:18px; height:2px; background:var(--text); border-radius:2px; position:relative; transition:transform .3s ease, opacity .3s ease, top .3s ease;
 }
+.hamburger span::before{position:absolute; top:-6px;}
+.hamburger span::after{position:absolute; top:6px;}
+.hamburger[aria-expanded="true"] span{background:transparent;}
+.hamburger[aria-expanded="true"] span::before{top:0; transform:rotate(45deg);}
+.hamburger[aria-expanded="true"] span::after{top:0; transform:rotate(-45deg);}
 
-p{
-    font-size:clamp(1rem,4vw,1.4rem);
+.mobile-backdrop{position:fixed; inset:0; background:rgba(6,11,26,.55); backdrop-filter:blur(2px); opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease; z-index:1001;}
+.mobile-backdrop.is-open{opacity:1; visibility:visible;}
+.mobile-menu{
+  position:fixed; top:0; right:0; bottom:0; width:min(84vw, 340px); z-index:1002;
+  background:var(--bg-elevated); box-shadow:-20px 0 50px rgba(0,0,0,.25);
+  transform:translateX(100%); transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  padding:calc(1.6rem + env(safe-area-inset-top,0px)) 1.6rem 1.6rem; display:flex; flex-direction:column; gap:1.6rem; overflow-y:auto;
 }
+.mobile-menu.is-open{transform:translateX(0);}
+.mobile-menu .nav-link{font-size:1.05rem; display:block; padding:.4rem 0;}
+.mobile-menu-head{display:flex; align-items:center; justify-content:space-between;}
+.mobile-actions{margin-top:auto; display:flex; flex-direction:column; gap:.8rem;}
 
-button{
-    width:100%;
-    max-width:350px;
-    padding:18px;
-    font-size:1.1rem;
-}
-
-.score{
-    font-size:clamp(1.4rem,5vw,2.2rem);
-}
-
-/* Tablets */
 @media (max-width:900px){
-
-.card{
-    padding:35px 20px;
+  .nav-links{display:none;}
+  .hamburger{display:inline-flex;}
 }
 
-canvas{
-    opacity:.9;
+/* =========================================================
+   3. HERO
+   ========================================================= */
+.hero{position:relative; background:radial-gradient(120% 100% at 15% 0%, #0E1C3E 0%, var(--navy-950) 55%); color:#fff; padding-top:clamp(2.5rem,6vw,4rem); overflow:hidden;}
+.hero::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 60%, var(--bg) 100%); pointer-events:none;}
+.starfield{position:absolute; inset:0; width:100%; height:100%; opacity:.9;}
+.hero-inner{position:relative; z-index:2; display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(2rem,5vw,4rem); align-items:center; padding-bottom:clamp(3rem,7vw,5.5rem);}
+.hero-copy{opacity:0; transform:translateY(18px); animation:heroIn .9s cubic-bezier(.2,.7,.2,1) forwards;}
+.hero-copy > *{opacity:0; transform:translateY(14px); animation:heroIn .8s cubic-bezier(.2,.7,.2,1) forwards;}
+.hero-copy .h-kicker{animation-delay:.05s;}
+.hero-copy h1{animation-delay:.15s;}
+.hero-copy .h-sub{animation-delay:.3s;}
+.hero-copy .h-urdu{animation-delay:.4s;}
+.hero-copy .h-ctas{animation-delay:.48s;}
+.hero-copy .h-chips{animation-delay:.58s;}
+@keyframes heroIn{to{opacity:1; transform:translateY(0);}}
+
+.h-kicker{display:inline-flex; align-items:center; gap:.55rem; padding:.45rem .95rem; border-radius:999px; background:rgba(228,197,103,.12); border:1px solid rgba(228,197,103,.35); color:var(--gold-300); font-weight:700; font-size:.82rem; margin-bottom:1.4rem;}
+.h-kicker svg{width:14px; height:14px;}
+.hero h1{font-size:clamp(2.6rem, 1.7rem + 4.6vw, 4.6rem); letter-spacing:-.02em; margin-bottom:1.1rem;}
+.hero h1 span{display:block; font-style:italic; font-weight:400; font-size:.42em; color:var(--gold-300); margin-top:.35rem; letter-spacing:0;}
+.h-sub{font-size:clamp(1.02rem, .9rem + .5vw, 1.2rem); color:#C4CCE3; max-width:46ch; margin-bottom:1rem;}
+.h-urdu{font-family:var(--font-urdu); direction:rtl; text-align:right; font-size:1.35rem; color:var(--gold-200); max-width:20ch; margin-bottom:1.9rem; line-height:1.9;}
+.h-ctas{display:flex; flex-wrap:wrap; gap:.9rem; margin-bottom:2.4rem;}
+.h-chips{display:flex; flex-wrap:wrap; gap:.7rem 1.4rem;}
+.h-chip{display:flex; align-items:center; gap:.4rem; font-size:.85rem; color:#C4CCE3;}
+.h-chip b{color:#fff; font-weight:700;}
+
+.hero-art{position:relative; aspect-ratio:1/1; max-width:480px; margin-inline:auto; width:100%;}
+.hero-art::before{content:''; position:absolute; inset:8%; background:radial-gradient(circle, rgba(228,197,103,.28), transparent 68%); filter:blur(6px); animation:glowPulse 5s ease-in-out infinite;}
+@keyframes glowPulse{0%,100%{opacity:.7;} 50%{opacity:1;}}
+.hero-illustration{position:relative; z-index:1; animation:floatY 7s ease-in-out infinite;}
+@keyframes floatY{0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);}}
+.hero-spark{animation:sparkle 2.6s ease-in-out infinite;}
+.hero-star-outline{animation:outlinePulse 6s ease-in-out infinite;}
+@keyframes sparkle{0%,100%{opacity:.25; transform:scale(.85);} 50%{opacity:1; transform:scale(1);}}
+@keyframes outlinePulse{0%,100%{opacity:.35;} 50%{opacity:.7;}}
+
+.float-chip{
+  position:absolute; display:flex; align-items:center; gap:.45rem; padding:.55rem .9rem;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(10px);
+  border-radius:999px; font-size:.82rem; font-weight:700; color:#fff; box-shadow:0 10px 24px -12px rgba(0,0,0,.5);
+  animation:chipFloat 5.5s ease-in-out infinite;
+}
+.float-chip span{font-size:1rem;}
+.chip-1{top:2%; left:-4%; animation-delay:0s;}
+.chip-2{top:6%; right:-6%; animation-delay:.6s;}
+.chip-3{bottom:10%; left:-8%; animation-delay:1.2s;}
+.chip-4{bottom:0; right:-2%; animation-delay:1.8s;}
+@keyframes chipFloat{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
+
+@media (max-width:980px){
+  .hero-inner{grid-template-columns:1fr; text-align:left;}
+  .hero-art{max-width:340px; margin-top:1rem;}
+  .float-chip{font-size:.72rem; padding:.45rem .7rem;}
+}
+@media (max-width:560px){
+  .hero-art{max-width:260px;}
+  .chip-1,.chip-2,.chip-3,.chip-4{position:static; display:inline-flex; margin:.25rem;}
+  .h-chips-mobile-wrap{display:flex; flex-wrap:wrap;}
 }
 
+.scroll-cue{position:absolute; left:50%; bottom:1.6rem; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:.4rem; color:#9AA6C6; font-size:.72rem; letter-spacing:.06em;}
+.scroll-cue svg{width:16px; height:22px; animation:cueBob 2s ease-in-out infinite;}
+@keyframes cueBob{0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);}}
+
+/* =========================================================
+   4. STATS LEDGER
+   ========================================================= */
+.stats-band{position:relative; z-index:2; background:var(--bg-elevated); border-radius:22px; box-shadow:var(--shadow-2); margin-top:clamp(-4.5rem,-6vw,-3rem); border:1px solid var(--border);}
+.stats-grid{display:grid; grid-template-columns:repeat(4,1fr);}
+.stat{padding:2rem 1.5rem; text-align:center; position:relative;}
+.stat + .stat::before{content:''; position:absolute; left:0; top:20%; bottom:20%; width:1px; background:var(--border);}
+.stat-num{font-family:var(--font-display); font-size:clamp(2rem,1.5rem + 2vw,2.9rem); font-weight:600; color:var(--navy-900); font-variant-numeric:tabular-nums;}
+:root[data-theme="dark"] .stat-num{color:#fff;}
+.stat-num .accent{color:var(--gold-600);}
+.stat-label{font-size:.9rem; color:var(--text-soft); margin-top:.3rem; font-weight:600;}
+@media (max-width:760px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(3)::before{display:none;}
 }
 
-/* Phones */
-@media (max-width:600px){
+/* =========================================================
+   5. ABOUT
+   ========================================================= */
+.about-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(2.5rem,5vw,4.5rem); align-items:center;}
+.about-features{display:flex; flex-direction:column; gap:1.1rem; margin-top:1.8rem;}
+.feature-row{display:flex; gap:1rem; padding:1.1rem 0; border-top:1px solid var(--border);}
+.feature-row:last-child{border-bottom:1px solid var(--border);}
+.feature-icon{flex:none; width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,var(--royal-600),var(--navy-800)); display:flex; align-items:center; justify-content:center; color:var(--gold-300);}
+.feature-icon svg{width:22px; height:22px;}
+.feature-row h3{margin-bottom:.25rem; font-size:1.05rem;}
+.feature-row p{font-size:.94rem;}
+.about-art{position:relative;}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr;} .about-art{order:-1; max-width:340px; margin-inline:auto;}}
 
-body{
-    padding:15px;
+/* =========================================================
+   6. PROGRAMS
+   ========================================================= */
+.program-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.4rem;}
+.program-card{
+  background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.9rem 1.7rem;
+  box-shadow:var(--shadow-1); transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  display:flex; flex-direction:column;
 }
+.program-card:hover{transform:translateY(-6px); box-shadow:var(--shadow-2); border-color:var(--gold-500);}
+.program-icon{width:52px; height:52px; border-radius:14px; background:var(--paper-100); display:flex; align-items:center; justify-content:center; color:var(--royal-600); margin-bottom:1.2rem;}
+:root[data-theme="dark"] .program-icon{background:rgba(228,197,103,.1); color:var(--gold-300);}
+.program-icon svg{width:26px; height:26px;}
+.program-card h3{margin-bottom:.5rem;}
+.program-card > p{font-size:.95rem; margin-bottom:1.1rem;}
+.program-more{display:grid; grid-template-rows:0fr; transition:grid-template-rows .4s ease;}
+.program-more.is-open{grid-template-rows:1fr;}
+.program-more-inner{overflow:hidden;}
+.program-more ul{display:flex; flex-direction:column; gap:.45rem; padding-bottom:1.1rem; font-size:.88rem; color:var(--text-muted);}
+.program-more li{display:flex; gap:.5rem;}
+.program-more li svg{width:14px; height:14px; flex:none; margin-top:3px; color:var(--gold-600);}
+.program-toggle{margin-top:auto; display:inline-flex; align-items:center; gap:.4rem; font-weight:700; font-size:.88rem; color:var(--royal-600); align-self:flex-start;}
+:root[data-theme="dark"] .program-toggle{color:var(--gold-300);}
+.program-toggle svg{width:15px; height:15px; transition:transform .3s ease;}
+.program-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
 
-.card{
-    width:100%;
-    border-radius:20px;
-    padding:25px 18px;
+/* =========================================================
+   7. WHY CHOOSE US — bento
+   ========================================================= */
+.bento{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:150px; gap:1rem;}
+.bento-item{
+  background:var(--card-bg); border:1px solid var(--border); border-radius:18px; padding:1.4rem;
+  display:flex; flex-direction:column; justify-content:flex-end; gap:.5rem; position:relative; overflow:hidden;
+  transition:transform .3s ease, box-shadow .3s ease;
 }
-
-h1{
-    font-size:2.4rem;
+.bento-item:hover{transform:translateY(-4px); box-shadow:var(--shadow-2);}
+.bento-item svg{width:24px; height:24px; color:var(--gold-600);}
+.bento-item h3{font-size:1rem;}
+.bento-item p{font-size:.85rem;}
+.bento-item.big{grid-column:span 2; grid-row:span 2;}
+.bento-item.big svg{width:30px; height:30px;}
+.bento-item.big h3{font-size:1.2rem;}
+.bento-item.accent{background:linear-gradient(150deg,var(--navy-900),var(--navy-800)); color:#fff; border-color:transparent;}
+.bento-item.accent p{color:#B7C1DE;}
+@media (max-width:900px){
+  .bento{grid-template-columns:repeat(2,1fr); grid-auto-rows:140px;}
+  .bento-item.big{grid-column:span 2; grid-row:span 1;}
 }
-
-p{
-    font-size:1rem;
-}
-
-button{
-    font-size:1rem;
-    padding:16px;
-}
-
-.score{
-    font-size:1.5rem;
-}
-
-.goat{
-    font-size:28px;
-}
-
-.cursor{
-    display:none;
-}
-
-}
-
-/* Very small phones */
-@media (max-width:360px){
-
-h1{
-    font-size:2rem;
-}
-
-button{
-    font-size:.95rem;
-}
-
-}
-  
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-overflow:hidden;
-height:100vh;
-background:linear-gradient(135deg,#09091f,#1d0b52,#4b0082,#0d5eff);
-background-size:400% 400%;
-animation:bg 12s infinite alternate;
-display:flex;
-justify-content:center;
-align-items:center;
+@media (max-width:520px){
+  .bento{grid-template-columns:1fr; grid-auto-rows:auto;}
+  .bento-item.big{grid-column:span 1;}
+  .bento-item{min-height:130px;}
 }
 
-@keyframes bg{
-0%{background-position:left;}
-100%{background-position:right;}
+/* =========================================================
+   8. FACULTY
+   ========================================================= */
+.faculty-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.4rem;}
+.faculty-card{background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.8rem 1.5rem; text-align:center; transition:transform .3s ease, box-shadow .3s ease;}
+.faculty-card:hover{transform:translateY(-6px); box-shadow:var(--shadow-2);}
+.avatar{
+  width:84px; height:84px; border-radius:50%; margin:0 auto 1rem; position:relative;
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.6rem; font-weight:600; color:#fff;
 }
+.avatar::before{content:''; position:absolute; inset:-5px; border-radius:50%; border:1.5px dashed var(--gold-500); opacity:.6;}
+.faculty-card h3{font-size:1.05rem; margin-bottom:.15rem;}
+.faculty-dept{color:var(--gold-600); font-weight:700; font-size:.82rem; margin-bottom:.6rem;}
+:root[data-theme="dark"] .faculty-dept{color:var(--gold-300);}
+.faculty-bio{font-size:.87rem; margin-bottom:1rem;}
+.faculty-meta{font-size:.78rem; color:var(--text-soft); margin-bottom:.9rem;}
+.faculty-social{display:flex; justify-content:center; gap:.5rem;}
+.faculty-social a{width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:border-color .2s ease, color .2s ease;}
+.faculty-social a:hover{border-color:var(--gold-500); color:var(--gold-600);}
+.faculty-social svg{width:14px; height:14px;}
 
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:0;
+/* =========================================================
+   9. ACHIEVEMENTS
+   ========================================================= */
+.achieve-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.3rem;}
+.achieve-card{
+  background:linear-gradient(160deg, var(--navy-900), var(--navy-800)); border-radius:20px; padding:1.8rem;
+  color:#fff; position:relative; overflow:hidden; transition:transform .3s ease;
 }
+.achieve-card:hover{transform:translateY(-5px);}
+.achieve-card svg.badge{width:34px; height:34px; color:var(--gold-300); margin-bottom:1rem;}
+.achieve-num{font-family:var(--font-display); font-size:1.8rem; font-weight:600; margin-bottom:.3rem;}
+.achieve-title{font-weight:700; font-size:.95rem; margin-bottom:.35rem;}
+.achieve-card p{font-size:.85rem; color:#AEB9D4;}
+.achieve-card::after{content:''; position:absolute; right:-30px; bottom:-30px; width:110px; height:110px; border-radius:50%; background:radial-gradient(circle, rgba(228,197,103,.18), transparent 70%);}
 
-.card{
-position:relative;
-z-index:2;
-padding:50px;
-background:rgba(255,255,255,.1);
-backdrop-filter:blur(15px);
-border-radius:30px;
-text-align:center;
-box-shadow:0 0 50px cyan;
-animation:float 4s ease-in-out infinite;
-}
+/* =========================================================
+   10. NEWS
+   ========================================================= */
+.news-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.4rem;}
+.news-card{background:var(--card-bg); border:1px solid var(--border); border-radius:20px; overflow:hidden; box-shadow:var(--shadow-1); transition:transform .3s ease, box-shadow .3s ease; display:flex; flex-direction:column;}
+.news-card:hover{transform:translateY(-6px); box-shadow:var(--shadow-2);}
+.news-art{height:150px; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden;}
+.news-art svg{width:56px; height:56px; color:rgba(255,255,255,.9); transition:transform .4s ease;}
+.news-card:hover .news-art svg{transform:scale(1.12) rotate(-4deg);}
+.news-tag{position:absolute; top:.8rem; left:.8rem; background:rgba(255,255,255,.16); backdrop-filter:blur(6px); color:#fff; font-size:.68rem; font-weight:800; letter-spacing:.06em; padding:.3rem .6rem; border-radius:999px; text-transform:uppercase;}
+.news-date{position:absolute; top:.8rem; right:.8rem; background:var(--gold-500); color:#241A02; font-weight:800; font-size:.72rem; padding:.3rem .55rem; border-radius:8px; line-height:1.1; text-align:center;}
+.news-body{padding:1.4rem; display:flex; flex-direction:column; gap:.6rem; flex:1;}
+.news-body h3{font-size:1.05rem;}
+.news-body p{font-size:.9rem; flex:1;}
+.news-readmore{align-self:flex-start; font-weight:700; font-size:.86rem; color:var(--royal-600); display:inline-flex; align-items:center; gap:.35rem;}
+:root[data-theme="dark"] .news-readmore{color:var(--gold-300);}
+.news-readmore svg{width:14px; height:14px; transition:transform .25s ease;}
+.news-readmore:hover svg{transform:translateX(3px);}
 
-@keyframes float{
-50%{transform:translateY(-15px);}
-}
+/* =========================================================
+   11. TESTIMONIALS
+   ========================================================= */
+.testimonial-carousel{position:relative; max-width:760px; margin-inline:auto;}
+.testimonial-viewport{overflow:hidden; border-radius:22px;}
+.testimonial-track{display:flex; transition:transform .5s cubic-bezier(.2,.7,.2,1);}
+.testimonial-slide{flex:0 0 100%; padding:clamp(1.8rem,4vw,3rem); background:var(--card-bg); border:1px solid var(--border); text-align:center;}
+.quote-mark{width:34px; height:34px; color:var(--gold-500); margin:0 auto 1rem;}
+.testimonial-slide p{font-family:var(--font-display); font-style:italic; font-size:clamp(1.1rem,1vw + 1rem,1.4rem); color:var(--text); line-height:1.55; margin-bottom:1.5rem;}
+.testimonial-person{display:flex; align-items:center; justify-content:center; gap:.7rem;}
+.testimonial-person .avatar{width:46px; height:46px; font-size:1rem; margin:0;}
+.testimonial-person-name{font-weight:700; font-size:.92rem; text-align:left;}
+.testimonial-person-class{font-size:.8rem; color:var(--text-soft); text-align:left;}
+.testimonial-arrow{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background:var(--bg-elevated); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-1); transition:background-color .2s ease, border-color .2s ease;}
+.testimonial-arrow:hover{border-color:var(--gold-500);}
+.testimonial-arrow svg{width:18px; height:18px;}
+.testimonial-prev{left:-22px;}
+.testimonial-next{right:-22px;}
+.testimonial-dots{display:flex; justify-content:center; gap:.5rem; margin-top:1.6rem;}
+.dot{width:8px; height:8px; border-radius:50%; background:var(--border); transition:background-color .25s ease, width .25s ease;}
+.dot.is-active{background:var(--gold-500); width:22px; border-radius:5px;}
+@media (max-width:640px){.testimonial-arrow{display:none;}}
 
-h1{
-font-size:70px;
-background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);
-background-size:300%;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:rainbow 5s linear infinite;
-}
+/* =========================================================
+   12. GALLERY
+   ========================================================= */
+.gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
+.gallery-tile{position:relative; border-radius:16px; overflow:hidden; aspect-ratio:1/1; cursor:pointer; border:1px solid var(--border);}
+.gallery-art{position:absolute; inset:0; transition:transform .5s ease;}
+.gallery-tile:hover .gallery-art{transform:scale(1.08);}
+.gallery-caption{position:absolute; inset-inline:0; bottom:0; padding:.8rem .9rem; background:linear-gradient(0deg, rgba(6,11,26,.85), transparent); color:#fff; font-size:.82rem; font-weight:700; opacity:0; transform:translateY(8px); transition:opacity .3s ease, transform .3s ease;}
+.gallery-tile:hover .gallery-caption{opacity:1; transform:translateY(0);}
+.gallery-zoom{position:absolute; top:.6rem; right:.6rem; width:30px; height:30px; border-radius:50%; background:rgba(255,255,255,.18); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s ease;}
+.gallery-tile:hover .gallery-zoom{opacity:1;}
+.gallery-zoom svg{width:14px; height:14px; color:#fff;}
+@media (max-width:900px){.gallery-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:600px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
 
-@keyframes rainbow{
-100%{background-position:300%;}
-}
+/* =========================================================
+   13. ADMISSIONS
+   ========================================================= */
+.admissions-inner{position:relative; z-index:2; text-align:center; max-width:640px; margin-inline:auto;}
+.admissions .eyebrow-mark{justify-content:center;}
+.admissions h2{color:#fff;}
+.admissions p{color:#B7C1DE; margin-bottom:2rem;}
+.admissions .h-ctas{justify-content:center; margin-bottom:0;}
 
-p{
-color:white;
-font-size:22px;
-margin:20px;
-}
+/* =========================================================
+   14. CONTACT
+   ========================================================= */
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem);}
+.contact-list{display:flex; flex-direction:column; gap:1.3rem; margin-bottom:1.8rem;}
+.contact-item{display:flex; gap:1rem; align-items:flex-start;}
+.contact-item .feature-icon{background:var(--paper-100); color:var(--royal-600);}
+:root[data-theme="dark"] .contact-item .feature-icon{background:rgba(228,197,103,.1); color:var(--gold-300);}
+.contact-item h4{font-size:.95rem; margin-bottom:.2rem;}
+.contact-item p{font-size:.9rem;}
+.sample-note{display:inline-block; font-size:.72rem; font-weight:700; color:var(--gold-600); background:rgba(201,162,39,.12); padding:.15rem .5rem; border-radius:6px; margin-left:.4rem; vertical-align:middle;}
+.map-art{border-radius:18px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/3; position:relative;}
+.contact-form-card{background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.8rem; box-shadow:var(--shadow-1);}
+.contact-form-card h3{margin-bottom:1rem;}
 
-button{
-padding:20px 40px;
-font-size:22px;
-border:none;
-border-radius:50px;
-cursor:pointer;
-background:linear-gradient(90deg,#ff00ff,#00ffff);
-color:white;
-font-weight:bold;
-transition:.3s;
-box-shadow:0 0 20px cyan;
+/* =========================================================
+   FORMS (shared)
+   ========================================================= */
+.field{margin-bottom:1.05rem; text-align:left;}
+.field label{display:block; font-size:.85rem; font-weight:700; margin-bottom:.4rem;}
+.field input, .field select, .field textarea{
+  width:100%; padding:.75rem .9rem; border-radius:10px; border:1.5px solid var(--border); background:var(--bg-elevated); color:var(--text);
+  transition:border-color .2s ease, box-shadow .2s ease;
 }
+.field input:focus, .field select:focus, .field textarea:focus{border-color:var(--gold-500); box-shadow:0 0 0 3px rgba(201,162,39,.18); outline:none;}
+.field input.has-error, .field select.has-error, .field textarea.has-error{border-color:#D14343;}
+.field-error{display:block; min-height:1.1em; font-size:.78rem; color:#D14343; margin-top:.3rem;}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
+@media (max-width:520px){.field-row{grid-template-columns:1fr;}}
 
-button:hover{
-transform:scale(1.1) rotate(-2deg);
-box-shadow:0 0 60px white;
-}
+/* =========================================================
+   15. MODALS
+   ========================================================= */
+.modal-overlay{position:fixed; inset:0; z-index:2000; display:flex; align-items:center; justify-content:center; padding:1.2rem; opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease;}
+.modal-overlay.is-open{opacity:1; visibility:visible;}
+.modal-backdrop{position:absolute; inset:0; background:rgba(6,11,26,.65); backdrop-filter:blur(3px);}
+.modal-box{position:relative; z-index:1; background:var(--bg-elevated); border-radius:22px; width:min(560px,100%); max-height:88vh; overflow-y:auto; padding:clamp(1.6rem,4vw,2.4rem); box-shadow:var(--shadow-2); transform:translateY(18px) scale(.98); transition:transform .35s cubic-bezier(.2,.8,.2,1);}
+.modal-overlay.is-open .modal-box{transform:translateY(0) scale(1);}
+.modal-close{position:absolute; top:1rem; right:1rem; width:36px; height:36px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center;}
+.modal-close svg{width:16px; height:16px;}
+.modal-title{font-size:1.4rem; margin-bottom:.3rem; padding-right:2rem;}
+.modal-meta{font-size:.8rem; color:var(--gold-600); font-weight:700; margin-bottom:1rem;}
+.modal-body p{font-size:.95rem; margin-bottom:.8rem;}
 
-.score{
-font-size:35px;
-margin-top:25px;
-color:white;
-}
+.admission-success{text-align:center; padding:1.5rem 0;}
+.success-check{width:74px; height:74px; margin:0 auto 1.2rem;}
+.success-check circle{stroke:var(--gold-500); stroke-width:2; fill:none; stroke-dasharray:166; stroke-dashoffset:166; animation:circleDraw .6s ease forwards;}
+.success-check path{stroke:var(--gold-500); stroke-width:3; fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:48; stroke-dashoffset:48; animation:checkDraw .4s ease .5s forwards;}
+@keyframes circleDraw{to{stroke-dashoffset:0;}}
+@keyframes checkDraw{to{stroke-dashoffset:0;}}
+.admission-success h3{margin-bottom:.5rem;}
 
-.goat{
-position:absolute;
-font-size:40px;
-pointer-events:none;
-animation:fly 5s linear forwards;
-}
+.lightbox .modal-box{width:min(640px,100%); padding:1.2rem; background:var(--navy-950);}
+.lightbox-body{border-radius:14px; overflow:hidden; aspect-ratio:1/1; max-width:360px; margin:0 auto;}
+.lightbox-caption{text-align:center; color:#fff; font-weight:700; margin-top:1rem;}
+.lightbox-nav{display:flex; justify-content:space-between; margin-top:.5rem;}
+.lightbox .icon-btn{border-color:rgba(255,255,255,.25); color:#fff;}
+.lightbox .modal-close{border-color:rgba(255,255,255,.25); color:#fff;}
 
-@keyframes fly{
-0%{
-transform:translateY(120vh) rotate(0deg);
-opacity:1;
-}
-100%{
-transform:translateY(-120vh) rotate(720deg);
-opacity:0;
-}
-}
+/* =========================================================
+   16. FOOTER / MISC
+   ========================================================= */
+.footer{background:var(--navy-950); color:#AEB9D4; padding:clamp(3rem,6vw,4.5rem) 0 1.6rem; position:relative; overflow:hidden;}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.1fr; gap:2.5rem; padding-bottom:2.5rem; border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-brand p{color:#8892AD; font-size:.9rem; margin:1rem 0 1.2rem; max-width:32ch;}
+.footer-urdu{font-family:var(--font-urdu); direction:rtl; color:var(--gold-300); font-size:1.1rem;}
+.footer h4{color:#fff; font-size:.95rem; margin-bottom:1rem;}
+.footer-links{display:flex; flex-direction:column; gap:.6rem;}
+.footer-links a{color:#AEB9D4; font-size:.9rem; transition:color .2s ease;}
+.footer-links a:hover{color:var(--gold-300);}
+.footer-social{display:flex; gap:.6rem; margin-top:1rem;}
+.footer-social a{width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; transition:border-color .2s ease, background-color .2s ease;}
+.footer-social a:hover{border-color:var(--gold-500); background:rgba(228,197,103,.1);}
+.footer-social svg{width:15px; height:15px;}
+.footer-bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:.8rem; padding-top:1.6rem; font-size:.8rem; color:#7581A0;}
+@media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.footer-grid{grid-template-columns:1fr;}}
 
-.spark{
-position:absolute;
-width:8px;
-height:8px;
-border-radius:50%;
-background:white;
-pointer-events:none;
-animation:spark .8s linear forwards;
+.back-to-top{
+  position:fixed; right:1.4rem; bottom:1.4rem; width:48px; height:48px; border-radius:50%;
+  background:var(--navy-900); color:#fff; display:flex; align-items:center; justify-content:center;
+  box-shadow:var(--shadow-2); opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity .3s ease, transform .3s ease, visibility .3s ease;
+  z-index:500; border:1px solid rgba(228,197,103,.3);
 }
+.back-to-top.is-visible{opacity:1; visibility:visible; transform:translateY(0);}
+.back-to-top svg{width:18px; height:18px;}
 
-@keyframes spark{
-100%{
-transform:translate(var(--x),var(--y));
-opacity:0;
-}
-}
+/* Reveal on scroll */
+[data-reveal]{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease;}
+[data-reveal].is-visible{opacity:1; transform:none;}
+[data-reveal="stagger"] > *{opacity:0; transform:translateY:20px;}
 
-.cursor{
-position:fixed;
-width:20px;
-height:20px;
-background:white;
-border-radius:50%;
-pointer-events:none;
-mix-blend-mode:difference;
-transform:translate(-50%,-50%);
-z-index:9999;
-box-shadow:0 0 25px white;
-}
+.divider-star{display:flex; align-items:center; justify-content:center; gap:1rem; margin:0 auto; max-width:var(--container); padding:0 1.5rem;}
+.divider-star::before, .divider-star::after{content:''; height:1px; flex:1; background:var(--border);}
+.divider-star svg{width:20px; height:20px; color:var(--gold-500); flex:none;}
 </style>
 </head>
-
 <body>
 
-<canvas id="stars"></canvas>
+<a href="#main" class="skip-link">Skip to content</a>
 
-<div class="cursor" id="cursor"></div>
-
-<div class="card">
-<h1>🐐 JERRY IS THE GOAT 🐐</h1>
-
-<p>Welcome to the greatest website ever created.</p>
-
-<button onclick="power()">
-🔥 UNLEASH JERRY POWER 🔥
-</button>
-
-<div class="score">
-Power Level:
-<span id="score">0</span>
+<!-- LOADER -->
+<div class="loader" aria-hidden="true">
+  <svg class="loader-mark" viewBox="0 0 24 24" fill="none"><use href="#icon-logo"></use></svg>
+  <div class="loader-text">STARS ACADEMY</div>
 </div>
 
+<!-- ICON SPRITE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="icon-logo" viewBox="0 0 24 24"><path d="M12 2.5l2.4 5.2 5.6.6-4.2 3.8 1.2 5.6L12 14.9 6.9 17.7l1.2-5.6-4.2-3.8 5.6-.6L12 2.5z" fill="url(#goldGrad)" stroke="none"/></symbol>
+<symbol id="icon-book" viewBox="0 0 24 24"><path d="M3 5.2c2.3-.9 5-.9 7 .6v13c-2-1.5-4.7-1.5-7-.6V5.2z"/><path d="M21 5.2c-2.3-.9-5-.9-7 .6v13c2-1.5 4.7-1.5 7-.6V5.2z"/></symbol>
+<symbol id="icon-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5"/></symbol>
+<symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8" fill="currentColor" stroke="none"/></symbol>
+<symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 4 5.3 4 8.5s-1.4 6.1-4 8.5c-2.6-2.4-4-5.3-4-8.5s1.4-6.1 4-8.5z"/></symbol>
+<symbol id="icon-cap" viewBox="0 0 24 24"><path d="M12 4l10 4.6-10 4.6L2 8.6 12 4z"/><path d="M6.5 10.8v4.4c0 1.6 2.5 3 5.5 3s5.5-1.4 5.5-3v-4.4"/><path d="M21 9.4v6"/></symbol>
+<symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.6 6.1.7-4.5 4.1 1.3 6-5.5-3.1-5.5 3.1 1.3-6-4.5-4.1 6.1-.7L12 3.5z"/></symbol>
+<symbol id="icon-flask" viewBox="0 0 24 24"><path d="M9.5 3h5M10 3v6.3L4.8 18.6c-.6 1.1.2 2.4 1.5 2.4h11.4c1.3 0 2.1-1.3 1.5-2.4L14 9.3V3"/><path d="M7.5 15h9"/></symbol>
+<symbol id="icon-laptop" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="11" rx="1.2"/><path d="M2 19.5h20"/></symbol>
+<symbol id="icon-medal" viewBox="0 0 24 24"><circle cx="12" cy="14.5" r="6"/><path d="M9 4l1 6M15 4l-1 6"/><path d="M12 11.5l1.6 3.2 3.5.4-2.6 2.3.7 3.4-3.2-1.8-3.2 1.8.7-3.4-2.6-2.3 3.5-.4L12 11.5z" fill="currentColor" stroke="none" opacity=".35"/></symbol>
+<symbol id="icon-users" viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="3"/><circle cx="16" cy="9" r="2.4"/><path d="M2.8 19.5c.6-3.3 2.9-5 5.7-5s5.1 1.7 5.7 5"/><path d="M14.8 15c2.3.2 4 1.8 4.4 4.5"/></symbol>
+<symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M12 2.5c3 1.8 4.8 5 4.8 8.7 0 2-1.7 4.3-1.7 4.3H8.9S7.2 13.2 7.2 11.2c0-3.7 1.8-6.9 4.8-8.7z"/><circle cx="12" cy="10" r="1.6"/><path d="M8.9 15.5l-2.4 4M15.1 15.5l2.4 4M9.8 19.5h4.4"/></symbol>
+<symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15 4.5l-8 7.5 8 7.5"/></symbol>
+<symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M9 4.5l8 7.5-8 7.5"/></symbol>
+<symbol id="icon-chevron-down" viewBox="0 0 24 24"><path d="M4.5 9l7.5 8 7.5-8"/></symbol>
+<symbol id="icon-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></symbol>
+<symbol id="icon-menu" viewBox="0 0 24 24"><path d="M3 6.5h18M3 12h18M3 17.5h18"/></symbol>
+<symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.3"/><path d="M12 2.5v2.3M12 19.2v2.3M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></symbol>
+<symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20 13.7A8.3 8.3 0 1110.3 4a6.6 6.6 0 009.7 9.7z"/></symbol>
+<symbol id="icon-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></symbol>
+<symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21.5S5 14.8 5 9.8a7 7 0 0114 0c0 5-7 11.7-7 11.7z"/><circle cx="12" cy="9.7" r="2.4"/></symbol>
+<symbol id="icon-phone" viewBox="0 0 24 24"><path d="M5.5 3.5h3l1.6 4-2 1.6a13 13 0 006.8 6.8l1.6-2 4 1.6v3c0 1-.9 1.8-1.9 1.6C10.6 19 5 13.4 3.9 5.4c-.1-1 .7-1.9 1.6-1.9z"/></symbol>
+<symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></symbol>
+<symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.2 2"/></symbol>
+<symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5"/></symbol>
+<symbol id="icon-quote" viewBox="0 0 24 24"><path d="M7.5 5C4.8 6.4 3.3 8.7 3.3 12c0 3 2 5.2 4.6 5.2 2 0 3.4-1.4 3.4-3.3 0-1.8-1.2-3-2.8-3.1-.5 0-1 0-1.3.2 0-2 1.2-3.7 3.4-4.5L7.5 5zM17 5c-2.7 1.4-4.2 3.7-4.2 7 0 3 2 5.2 4.6 5.2 2 0 3.4-1.4 3.4-3.3 0-1.8-1.2-3-2.8-3.1-.5 0-1 0-1.3.2 0-2 1.2-3.7 3.4-4.5L17 5z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="icon-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.8 10v6.5M7.8 7.6v.1M11.8 16.5V10M11.8 12.8c0-1.6 1-2.8 2.5-2.8 1.6 0 2.4 1 2.4 2.9v3.6" fill="none"/></symbol>
+<symbol id="icon-fb" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M14 8.5h1.8V6h-2c-2 0-3.3 1.3-3.3 3.4v1.6H8.7V13H10.5v7.5h2.4V13h1.9l.3-2H12.9V9.7c0-.7.3-1.2 1.1-1.2z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="icon-youtube" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10.5 9.7l5 2.3-5 2.3v-4.6z" fill="currentColor" stroke="none"/></symbol>
+</defs>
+</svg>
+
+<svg width="0" height="0" aria-hidden="true">
+<defs>
+<linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#F1DA95"/>
+  <stop offset="1" stop-color="#B4881B"/>
+</linearGradient>
+<linearGradient id="avatarGrad1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2C63AD"/><stop offset="1" stop-color="#12234A"/></linearGradient>
+<linearGradient id="avatarGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C9A227"/><stop offset="1" stop-color="#8C6A14"/></linearGradient>
+</defs>
+</svg>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24"><use href="#icon-logo"></use></svg>
+      <span class="brand-word">Stars <b>Academy</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-link" href="#home">Home</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#programs">Programs</a>
+      <a class="nav-link" href="#faculty">Faculty</a>
+      <a class="nav-link" href="#achievements">Achievements</a>
+      <a class="nav-link" href="#events">Events</a>
+      <a class="nav-link" href="#admissions">Admissions</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">
+        <svg class="moon" viewBox="0 0 24 24"><use href="#icon-moon"></use></svg>
+        <svg class="sun" viewBox="0 0 24 24"><use href="#icon-sun"></use></svg>
+      </button>
+      <a href="#admissions" class="btn btn-gold btn-sm" data-nav-cta>Admissions</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-backdrop" id="mobileBackdrop"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <div class="mobile-menu-head">
+    <span class="brand"><svg class="brand-mark" viewBox="0 0 24 24"><use href="#icon-logo"></use></svg> Stars Academy</span>
+    <button class="icon-btn" id="mobileCloseBtn" aria-label="Close menu"><svg viewBox="0 0 24 24"><use href="#icon-close"></use></svg></button>
+  </div>
+  <a class="nav-link" href="#home">Home</a>
+  <a class="nav-link" href="#about">About</a>
+  <a class="nav-link" href="#programs">Programs</a>
+  <a class="nav-link" href="#faculty">Faculty</a>
+  <a class="nav-link" href="#achievements">Achievements</a>
+  <a class="nav-link" href="#events">Events</a>
+  <a class="nav-link" href="#admissions">Admissions</a>
+  <a class="nav-link" href="#contact">Contact</a>
+  <div class="mobile-actions">
+    <button class="icon-btn theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" style="align-self:center;">
+      <svg class="moon" viewBox="0 0 24 24"><use href="#icon-moon"></use></svg>
+      <svg class="sun" viewBox="0 0 24 24"><use href="#icon-sun"></use></svg>
+    </button>
+    <a href="#admissions" class="btn btn-gold btn-block">Admissions Open</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas class="starfield" aria-hidden="true"></canvas>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="h-kicker"><svg viewBox="0 0 24 24"><use href="#icon-star"></use></svg>Pakistan's academy for ambitious students</span>
+      <h1>Stars Academy<span>“Where Dreams Become Achievements.”</span></h1>
+      <p class="h-sub">Empowering students with knowledge, confidence, discipline, and the skills they need to build a brighter future.</p>
+      <p class="h-urdu">خواب سے کامیابی تک</p>
+      <div class="h-ctas">
+        <a href="#about" class="btn btn-gold">Explore Our Academy</a>
+        <a href="#admissions" class="btn btn-outline">Admissions Open</a>
+      </div>
+      <div class="h-chips">
+        <span class="h-chip"><b>10+</b>&nbsp;years</span>
+        <span class="h-chip"><b>5,000+</b>&nbsp;students</span>
+        <span class="h-chip"><b>95%+</b>&nbsp;success rate</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-illustration">
+        <svg viewBox="0 0 480 480" aria-hidden="true">
+          <polygon class="hero-star-outline" points="240,40 270,190 430,190 300,275 335,430 240,335 145,430 180,275 50,190 210,190" fill="none" stroke="#E4C567" stroke-width="1.4"/>
+          <g stroke="#E4C567" fill="none">
+            <circle class="hero-spark" cx="90" cy="120" r="3" style="animation-delay:.2s"/>
+            <circle class="hero-spark" cx="400" cy="110" r="2.4" style="animation-delay:.9s"/>
+            <circle class="hero-spark" cx="420" cy="320" r="3" style="animation-delay:1.4s"/>
+            <circle class="hero-spark" cx="70" cy="330" r="2.4" style="animation-delay:.6s"/>
+            <circle class="hero-spark" cx="240" cy="60" r="2" style="animation-delay:1.8s"/>
+          </g>
+          <path d="M150 260 Q240 230 240 260 L240 360 Q240 330 150 350 Z" fill="#F6F8FC" stroke="#12234A" stroke-width="2.5"/>
+          <path d="M330 260 Q240 230 240 260 L240 360 Q240 330 330 350 Z" fill="#EDF1F9" stroke="#12234A" stroke-width="2.5"/>
+          <line x1="240" y1="260" x2="240" y2="360" stroke="#12234A" stroke-width="2"/>
+          <g transform="translate(240 190)">
+            <polygon points="0,-14 78,14 0,42 -78,14" fill="url(#goldGrad)"/>
+            <rect x="-14" y="14" width="28" height="20" rx="3" fill="#B4881B"/>
+            <line x1="60" y1="8" x2="60" y2="46" stroke="#B4881B" stroke-width="2.5"/>
+            <circle cx="60" cy="49" r="4" fill="#B4881B"/>
+          </g>
+        </svg>
+      </div>
+      <span class="float-chip chip-1"><span>⭐</span>Excellence</span>
+      <span class="float-chip chip-2"><span>📚</span>Knowledge</span>
+      <span class="float-chip chip-3"><span>🎓</span>Success</span>
+      <span class="float-chip chip-4"><span>🚀</span>Future</span>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span>Scroll</span><svg viewBox="0 0 16 22"><rect x="1" y="1" width="14" height="20" rx="7" fill="none" stroke="currentColor"/><circle cx="8" cy="7" r="2" fill="currentColor"/></svg></div>
+</section>
+
+<!-- STATS -->
+<div class="container">
+  <div class="stats-band" data-reveal>
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-num"><span data-count="10" data-suffix="+">0</span></div><div class="stat-label">Years of Excellence</div></div>
+      <div class="stat"><div class="stat-num"><span data-count="5000" data-suffix="+">0</span></div><div class="stat-label">Students</div></div>
+      <div class="stat"><div class="stat-num"><span data-count="95" data-suffix="%+">0</span></div><div class="stat-label">Academic Success</div></div>
+      <div class="stat"><div class="stat-num"><span data-count="50" data-suffix="+">0</span></div><div class="stat-label">Expert Teachers</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div data-reveal>
+      <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-star"></use></svg>About Stars Academy</span>
+      <h2>More Than Education — We Build Futures.</h2>
+      <p class="lede">Stars Academy is a Pakistani academic institution focused on helping students achieve academic excellence while developing the confidence, discipline, creativity, communication, and problem-solving abilities they'll rely on long after the results are announced.</p>
+      <div class="about-features">
+        <div class="feature-row">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><use href="#icon-book"></use></svg></div>
+          <div><h3>Academic Excellence</h3><p>Focused learning and strong academic foundations.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></div>
+          <div><h3>Student Success</h3><p>Helping every student reach their potential.</p></div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><use href="#icon-rocket"></use></svg></div>
+          <div><h3>Future Ready</h3><p>Preparing students for higher education and future careers.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-art" data-reveal>
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <circle cx="200" cy="200" r="150" fill="none" stroke="var(--border)" stroke-dasharray="3 6"/>
+        <circle cx="200" cy="200" r="46" fill="url(#avatarGrad1)"/>
+        <svg x="177" y="177" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#E4C567" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-star"></use></svg>
+        <g stroke="var(--border)" stroke-width="1.4">
+          <line x1="200" y1="200" x2="200" y2="66"/>
+          <line x1="200" y1="200" x2="330" y2="270"/>
+          <line x1="200" y1="200" x2="70" y2="270"/>
+        </g>
+        <g>
+          <circle cx="200" cy="66" r="34" fill="var(--card-bg)" stroke="var(--border)"/>
+          <svg x="183" y="49" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#B4881B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-book"></use></svg>
+        </g>
+        <g>
+          <circle cx="330" cy="270" r="34" fill="var(--card-bg)" stroke="var(--border)"/>
+          <svg x="313" y="253" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#B4881B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-target"></use></svg>
+        </g>
+        <g>
+          <circle cx="70" cy="270" r="34" fill="var(--card-bg)" stroke="var(--border)"/>
+          <svg x="53" y="253" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#B4881B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-rocket"></use></svg>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="section" id="programs" style="background:var(--bg-elevated);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-layers"></use></svg>Academic Programs</span>
+      <h2>Our Academic Programs</h2>
+      <p class="lede">Five focused tracks, each built around the boards and tests our students are actually preparing for.</p>
+    </div>
+    <div class="program-grid" data-reveal>
+
+      <article class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><use href="#icon-book"></use></svg></div>
+        <h3>Matriculation</h3>
+        <p>Strong foundations for secondary education.</p>
+        <div class="program-more" id="more-matric"><div class="program-more-inner"><ul>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Grades 9–10 · Science &amp; Computer Science groups</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Physics, Chemistry, Biology/Computer Science, Mathematics</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Aligned to Punjab &amp; Federal board syllabi</li>
+        </ul></div></div>
+        <button class="program-toggle" aria-expanded="false" aria-controls="more-matric"><span class="program-toggle-label">Learn More</span><svg viewBox="0 0 24 24"><use href="#icon-chevron-down"></use></svg></button>
+      </article>
+
+      <article class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><use href="#icon-layers"></use></svg></div>
+        <h3>Intermediate</h3>
+        <p>Comprehensive preparation for higher secondary education.</p>
+        <div class="program-more" id="more-inter"><div class="program-more-inner"><ul>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>FSc Pre-Medical, Pre-Engineering &amp; ICS streams</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Concept-first teaching with regular assessments</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Direct bridge into our Entry Test track</li>
+        </ul></div></div>
+        <button class="program-toggle" aria-expanded="false" aria-controls="more-inter"><span class="program-toggle-label">Learn More</span><svg viewBox="0 0 24 24"><use href="#icon-chevron-down"></use></svg></button>
+      </article>
+
+      <article class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></div>
+        <h3>Entry Test Preparation</h3>
+        <p>Preparation for competitive university entrance examinations.</p>
+        <div class="program-more" id="more-entry"><div class="program-more-inner"><ul>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>MDCAT, ECAT, NET &amp; other university-specific tests</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Timed mock tests with detailed score analysis</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Small-batch problem-solving sessions</li>
+        </ul></div></div>
+        <button class="program-toggle" aria-expanded="false" aria-controls="more-entry"><span class="program-toggle-label">Learn More</span><svg viewBox="0 0 24 24"><use href="#icon-chevron-down"></use></svg></button>
+      </article>
+
+      <article class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><use href="#icon-globe"></use></svg></div>
+        <h3>O-Level</h3>
+        <p>Internationally recognized academic preparation.</p>
+        <div class="program-more" id="more-olevel"><div class="program-more-inner"><ul>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Cambridge IGCSE / O-Level syllabus coverage</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Past-paper driven exam technique</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Small class sizes for individual attention</li>
+        </ul></div></div>
+        <button class="program-toggle" aria-expanded="false" aria-controls="more-olevel"><span class="program-toggle-label">Learn More</span><svg viewBox="0 0 24 24"><use href="#icon-chevron-down"></use></svg></button>
+      </article>
+
+      <article class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><use href="#icon-cap"></use></svg></div>
+        <h3>A-Level</h3>
+        <p>Advanced academic preparation for university.</p>
+        <div class="program-more" id="more-alevel"><div class="program-more-inner"><ul>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Cambridge A-Level, AS &amp; A2 streams</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>University &amp; scholarship application guidance</li>
+          <li><svg viewBox="0 0 24 24"><use href="#icon-check"></use></svg>Subject specialists for every major group</li>
+        </ul></div></div>
+        <button class="program-toggle" aria-expanded="false" aria-controls="more-alevel"><span class="program-toggle-label">Learn More</span><svg viewBox="0 0 24 24"><use href="#icon-chevron-down"></use></svg></button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <span class="eyebrow-mark" style="justify-content:center;"><svg viewBox="0 0 24 24"><use href="#icon-medal"></use></svg>Why Stars Academy</span>
+      <h2>Why Choose Stars Academy?</h2>
+    </div>
+    <div class="bento" data-reveal>
+      <div class="bento-item big accent">
+        <svg viewBox="0 0 24 24"><use href="#icon-star"></use></svg>
+        <h3>Experienced Faculty</h3>
+        <p>Subject specialists who know exactly what each board and test expects.</p>
+      </div>
+      <div class="bento-item"><svg viewBox="0 0 24 24"><use href="#icon-book"></use></svg><h3>Modern Learning Methods</h3><p>Concept-first teaching, not rote memorization.</p></div>
+      <div class="bento-item"><svg viewBox="0 0 24 24"><use href="#icon-flask"></use></svg><h3>Practical Learning</h3><p>Lab work and applied exercises alongside theory.</p></div>
+      <div class="bento-item"><svg viewBox="0 0 24 24"><use href="#icon-laptop"></use></svg><h3>Technology-Enhanced</h3><p>Digital tools and resources built into every class.</p></div>
+      <div class="bento-item"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg><h3>Personalized Support</h3><p>Progress tracked at the individual student level.</p></div>
+      <div class="bento-item"><svg viewBox="0 0 24 24"><use href="#icon-medal"></use></svg><h3>Academic Excellence</h3><p>A consistent record of strong board results.</p></div>
+      <div class="bento-item big"><svg viewBox="0 0 24 24"><use href="#icon-users"></use></svg><h3>Supportive Environment</h3><p>A campus culture where students feel comfortable asking questions and pushing themselves further.</p></div>
+      <div class="bento-item"><svg viewBox="0 0 24 24"><use href="#icon-globe"></use></svg><h3>Future-Focused</h3><p>Guidance that looks beyond the next exam.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY -->
+<section class="section" id="faculty" style="background:var(--bg-elevated);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-users"></use></svg>Our Faculty</span>
+      <h2>Meet Our Educators</h2>
+      <p class="lede">A faculty of subject specialists, each focused on one department and the boards their students sit.</p>
+    </div>
+    <div class="faculty-grid" data-reveal>
+      <div class="faculty-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#2C63AD,#12234A)">AK</div>
+        <h3>Dr. Ahmed Khan</h3>
+        <div class="faculty-dept">Mathematics Department</div>
+        <p class="faculty-bio">Specialises in exam-focused problem solving for Matric and Intermediate students.</p>
+        <div class="faculty-meta">PhD Mathematics · 14 years teaching</div>
+        <div class="faculty-social"><a href="#" aria-label="Email Dr. Ahmed Khan"><svg viewBox="0 0 24 24"><use href="#icon-mail"></use></svg></a><a href="#" aria-label="Dr. Ahmed Khan on LinkedIn"><svg viewBox="0 0 24 24"><use href="#icon-linkedin"></use></svg></a></div>
+      </div>
+      <div class="faculty-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#C9A227,#8C6A14)">SA</div>
+        <h3>Ms. Sara Ahmed</h3>
+        <div class="faculty-dept">English Department</div>
+        <p class="faculty-bio">Builds writing and comprehension skills across O-Level and A-Level classes.</p>
+        <div class="faculty-meta">MPhil English Literature · 9 years teaching</div>
+        <div class="faculty-social"><a href="#" aria-label="Email Ms. Sara Ahmed"><svg viewBox="0 0 24 24"><use href="#icon-mail"></use></svg></a><a href="#" aria-label="Ms. Sara Ahmed on LinkedIn"><svg viewBox="0 0 24 24"><use href="#icon-linkedin"></use></svg></a></div>
+      </div>
+      <div class="faculty-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#2C63AD,#12234A)">HA</div>
+        <h3>Mr. Hamza Ali</h3>
+        <div class="faculty-dept">Physics Department</div>
+        <p class="faculty-bio">Known for making mechanics and electromagnetism click through demonstrations.</p>
+        <div class="faculty-meta">MSc Physics · 11 years teaching</div>
+        <div class="faculty-social"><a href="#" aria-label="Email Mr. Hamza Ali"><svg viewBox="0 0 24 24"><use href="#icon-mail"></use></svg></a><a href="#" aria-label="Mr. Hamza Ali on LinkedIn"><svg viewBox="0 0 24 24"><use href="#icon-linkedin"></use></svg></a></div>
+      </div>
+      <div class="faculty-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#C9A227,#8C6A14)">AM</div>
+        <h3>Ms. Ayesha Malik</h3>
+        <div class="faculty-dept">Biology Department</div>
+        <p class="faculty-bio">Leads MDCAT-focused biology sessions with an emphasis on past-paper practice.</p>
+        <div class="faculty-meta">MPhil Zoology · 8 years teaching</div>
+        <div class="faculty-social"><a href="#" aria-label="Email Ms. Ayesha Malik"><svg viewBox="0 0 24 24"><use href="#icon-mail"></use></svg></a><a href="#" aria-label="Ms. Ayesha Malik on LinkedIn"><svg viewBox="0 0 24 24"><use href="#icon-linkedin"></use></svg></a></div>
+      </div>
+      <div class="faculty-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#2C63AD,#12234A)">BC</div>
+        <h3>Mr. Bilal Chaudhry</h3>
+        <div class="faculty-dept">Chemistry Department</div>
+        <p class="faculty-bio">Combines lab demonstrations with rigorous numerical practice for ECAT and MDCAT.</p>
+        <div class="faculty-meta">MSc Chemistry · 10 years teaching</div>
+        <div class="faculty-social"><a href="#" aria-label="Email Mr. Bilal Chaudhry"><svg viewBox="0 0 24 24"><use href="#icon-mail"></use></svg></a><a href="#" aria-label="Mr. Bilal Chaudhry on LinkedIn"><svg viewBox="0 0 24 24"><use href="#icon-linkedin"></use></svg></a></div>
+      </div>
+      <div class="faculty-card">
+        <div class="avatar" style="background:linear-gradient(135deg,#C9A227,#8C6A14)">NF</div>
+        <h3>Ms. Noor Fatima</h3>
+        <div class="faculty-dept">Computer Science Department</div>
+        <p class="faculty-bio">Teaches programming fundamentals and computational thinking for ICS students.</p>
+        <div class="faculty-meta">BS Computer Science · 6 years teaching</div>
+        <div class="faculty-social"><a href="#" aria-label="Email Ms. Noor Fatima"><svg viewBox="0 0 24 24"><use href="#icon-mail"></use></svg></a><a href="#" aria-label="Ms. Noor Fatima on LinkedIn"><svg viewBox="0 0 24 24"><use href="#icon-linkedin"></use></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="section" id="achievements">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-medal"></use></svg>Student Achievements</span>
+      <h2>Results Our Students Are Proud Of</h2>
+    </div>
+    <div class="achieve-grid" data-reveal>
+      <div class="achieve-card">
+        <svg class="badge" viewBox="0 0 24 24"><use href="#icon-medal"></use></svg>
+        <div class="achieve-num">127 students</div>
+        <div class="achieve-title">Top Matriculation Results</div>
+        <p>Scored A+ in the 2026 Matriculation board examinations.</p>
+      </div>
+      <div class="achieve-card">
+        <svg class="badge" viewBox="0 0 24 24"><use href="#icon-flask"></use></svg>
+        <div class="achieve-num">1st Place</div>
+        <div class="achieve-title">National Science Competition</div>
+        <p>Won first place at the 2025 National Science Competition.</p>
+      </div>
+      <div class="achieve-card">
+        <svg class="badge" viewBox="0 0 24 24"><use href="#icon-cap"></use></svg>
+        <div class="achieve-num">300+ students</div>
+        <div class="achieve-title">University Admissions</div>
+        <p>Admitted to leading universities across Pakistan this year.</p>
+      </div>
+      <div class="achieve-card">
+        <svg class="badge" viewBox="0 0 24 24"><use href="#icon-star"></use></svg>
+        <div class="achieve-num">18 awards</div>
+        <div class="achieve-title">Academic Excellence Awards</div>
+        <p>Presented to top performers across all programs in 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS / EVENTS -->
+<section class="section" id="events" style="background:var(--bg-elevated);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-clock"></use></svg>News &amp; Events</span>
+      <h2>Latest News &amp; Events</h2>
+    </div>
+    <div class="news-grid" data-reveal>
+
+      <article class="news-card">
+        <div class="news-art" style="background:linear-gradient(135deg,#1F4E8C,#0B1730)">
+          <span class="news-tag">Event</span><span class="news-date">12<br>Mar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-flask"></use></svg>
+        </div>
+        <div class="news-body">
+          <h3>Annual Science Exhibition 2026</h3>
+          <p>Students showcase original science and engineering projects to judges and visiting families.</p>
+          <button class="news-readmore" data-open-news
+            data-title="Annual Science Exhibition 2026"
+            data-meta="Event · March 12, 2026"
+            data-body="Every March, the campus courtyard turns into a working science fair. Students from Matric through A-Level present projects they have built themselves, from simple circuits to small robotics demonstrations, and a panel of teachers scores each entry on originality and understanding. Parents are welcome to walk through and ask the student presenters questions directly.">
+            Read More<svg viewBox="0 0 24 24"><use href="#icon-arrow-right"></use></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-art" style="background:linear-gradient(135deg,#C9A227,#8C6A14)">
+          <span class="news-tag">Admissions</span><span class="news-date">Open<br>Now</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-mail"></use></svg>
+        </div>
+        <div class="news-body">
+          <h3>Admissions Now Open</h3>
+          <p>Registration for the new academic session is open across all five programs.</p>
+          <button class="news-readmore" data-open-news
+            data-title="Admissions Now Open"
+            data-meta="Admissions · Ongoing"
+            data-body="Seats are now open for Matriculation, Intermediate, O-Level, A-Level, and our Entry Test Preparation track. Early applicants get priority placement in smaller batches and first pick of class timings. The admissions team can walk families through documents, fee structure, and a short placement assessment before classes begin.">
+            Read More<svg viewBox="0 0 24 24"><use href="#icon-arrow-right"></use></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-art" style="background:linear-gradient(135deg,#2C5AA0,#12234A)">
+          <span class="news-tag">Awards</span><span class="news-date">28<br>Apr</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-medal"></use></svg>
+        </div>
+        <div class="news-body">
+          <h3>Stars Academy Achievement Awards</h3>
+          <p>An evening honouring top academic performers and most-improved students.</p>
+          <button class="news-readmore" data-open-news
+            data-title="Stars Academy Achievement Awards"
+            data-meta="Awards · April 28, 2026"
+            data-body="Once a year, Stars Academy brings students, teachers, and families together to recognise the session's top results alongside a 'most improved' award for students who made the biggest jump in their grades. It is one of the few events where the whole academy, every program and grade, sits in the same room.">
+            Read More<svg viewBox="0 0 24 24"><use href="#icon-arrow-right"></use></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-art" style="background:linear-gradient(135deg,#1B3364,#060B1A)">
+          <span class="news-tag">Competition</span><span class="news-date">05<br>Jun</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-target"></use></svg>
+        </div>
+        <div class="news-body">
+          <h3>Inter-Academy Quiz Competition</h3>
+          <p>Our team competes against academies from across the city in a general-knowledge quiz.</p>
+          <button class="news-readmore" data-open-news
+            data-title="Inter-Academy Quiz Competition"
+            data-meta="Competition · June 5, 2026"
+            data-body="A team of eight students represents Stars Academy at the city-wide Inter-Academy Quiz Competition, covering science, mathematics, current affairs, and general knowledge. Try-outs are held on campus a few weeks in advance, and the whole academy is invited to attend the final round in person.">
+            Read More<svg viewBox="0 0 24 24"><use href="#icon-arrow-right"></use></svg>
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider-star" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-star"></use></svg></div>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <span class="eyebrow-mark" style="justify-content:center;"><svg viewBox="0 0 24 24"><use href="#icon-quote"></use></svg>Student Voices</span>
+      <h2>What Our Students Say</h2>
+    </div>
+    <div class="testimonial-carousel" data-reveal>
+      <button class="testimonial-arrow testimonial-prev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24"><use href="#icon-chevron-left"></use></svg></button>
+      <button class="testimonial-arrow testimonial-next" aria-label="Next testimonial"><svg viewBox="0 0 24 24"><use href="#icon-chevron-right"></use></svg></button>
+      <div class="testimonial-viewport">
+        <div class="testimonial-track" aria-live="polite">
+          <div class="testimonial-slide">
+            <svg class="quote-mark" viewBox="0 0 24 24"><use href="#icon-quote"></use></svg>
+            <p>Stars Academy helped me become more confident and completely changed the way I approach my studies.</p>
+            <div class="testimonial-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#2C63AD,#12234A); width:46px; height:46px; font-size:1rem;">FH</div>
+              <div><div class="testimonial-person-name">Fatima Hassan</div><div class="testimonial-person-class">Matriculation, Class of 2026</div></div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <svg class="quote-mark" viewBox="0 0 24 24"><use href="#icon-quote"></use></svg>
+            <p>The teachers actually notice when you're struggling. My Intermediate results improved because someone caught it early.</p>
+            <div class="testimonial-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#C9A227,#8C6A14); width:46px; height:46px; font-size:1rem;">UR</div>
+              <div><div class="testimonial-person-name">Usman Raza</div><div class="testimonial-person-class">Intermediate, Pre-Engineering</div></div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <svg class="quote-mark" viewBox="0 0 24 24"><use href="#icon-quote"></use></svg>
+            <p>The Entry Test batch felt like a second home during MDCAT prep. The mock tests were tougher than the real thing.</p>
+            <div class="testimonial-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#2C63AD,#12234A); width:46px; height:46px; font-size:1rem;">ZK</div>
+              <div><div class="testimonial-person-name">Zainab Khan</div><div class="testimonial-person-class">Entry Test Preparation</div></div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <svg class="quote-mark" viewBox="0 0 24 24"><use href="#icon-quote"></use></svg>
+            <p>Coming from an O-Level background, I was nervous about A-Levels. The subject teachers made the jump feel manageable.</p>
+            <div class="testimonial-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#C9A227,#8C6A14); width:46px; height:46px; font-size:1rem;">AH</div>
+              <div><div class="testimonial-person-name">Ali Hamza</div><div class="testimonial-person-class">A-Level, Year 13</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery" style="background:var(--bg-elevated);">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-layers"></use></svg>Campus Life</span>
+      <h2>Life at Stars Academy</h2>
+      <p class="lede">A look at classrooms, labs, and the moments in between — illustrated for this project in the academy's own visual style.</p>
+    </div>
+    <div class="gallery-grid" data-reveal>
+
+      <div class="gallery-tile" data-caption="Classrooms" tabindex="0" role="button" aria-label="Open Classrooms image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#1F4E8C,#0B1730)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#E4C567" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <rect x="20" y="30" width="80" height="8" rx="2"/><line x1="30" y1="34" x2="90" y2="34" stroke-dasharray="2 3"/>
+            <rect x="26" y="58" width="20" height="14" rx="2"/><rect x="50" y="58" width="20" height="14" rx="2"/><rect x="74" y="58" width="20" height="14" rx="2"/>
+            <rect x="26" y="82" width="20" height="14" rx="2"/><rect x="50" y="82" width="20" height="14" rx="2"/><rect x="74" y="82" width="20" height="14" rx="2"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Classrooms</span>
+      </div>
+
+      <div class="gallery-tile" data-caption="Science Laboratory" tabindex="0" role="button" aria-label="Open Science Laboratory image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#2C5AA0,#12234A)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#E4C567" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <path d="M50 25h20 M55 25v18l-16 30a5 5 0 004 8h34a5 5 0 004-8L65 43V25"/>
+            <circle cx="55" cy="80" r="2" fill="#E4C567" stroke="none"/><circle cx="63" cy="86" r="2" fill="#E4C567" stroke="none"/><circle cx="70" cy="78" r="1.6" fill="#E4C567" stroke="none"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Science Laboratory</span>
+      </div>
+
+      <div class="gallery-tile" data-caption="Library" tabindex="0" role="button" aria-label="Open Library image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#1B3364,#060B1A)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#E4C567" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <line x1="22" y1="95" x2="98" y2="95"/>
+            <rect x="28" y="50" width="8" height="45"/><rect x="38" y="40" width="8" height="55"/><rect x="48" y="58" width="8" height="37"/><rect x="58" y="35" width="8" height="60"/><rect x="68" y="48" width="8" height="47"/><rect x="78" y="55" width="8" height="40"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Library</span>
+      </div>
+
+      <div class="gallery-tile" data-caption="Students Studying" tabindex="0" role="button" aria-label="Open Students Studying image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#12234A,#0B1730)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#E4C567" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <path d="M30 70c5-3 12-3 17 1M64 70c5-3 12-3 17 1"/><path d="M30 71v14M64 71v14M47 71v14"/>
+            <circle cx="80" cy="42" r="8"/><path d="M76 42a4 4 0 018 0"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Students Studying</span>
+      </div>
+
+      <div class="gallery-tile" data-caption="Sports Activities" tabindex="0" role="button" aria-label="Open Sports Activities image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#2C63AD,#12234A)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#E4C567" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <circle cx="60" cy="60" r="18"/><path d="M60 42v36M42 60h36M47 47l26 26M73 47L47 73"/>
+            <path d="M20 90c8-4 16-4 24 0M76 90c8-4 16-4 24 0"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Sports Activities</span>
+      </div>
+
+      <div class="gallery-tile" data-caption="Events" tabindex="0" role="button" aria-label="Open Events image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#C9A227,#8C6A14)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#0B1730" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <rect x="30" y="70" width="60" height="10"/><rect x="42" y="55" width="36" height="15"/>
+            <path d="M60 20l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#0B1730" stroke="none"/>
+            <circle cx="30" cy="35" r="2" fill="#0B1730" stroke="none"/><circle cx="90" cy="40" r="2" fill="#0B1730" stroke="none"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Events</span>
+      </div>
+
+      <div class="gallery-tile" data-caption="Award Ceremonies" tabindex="0" role="button" aria-label="Open Award Ceremonies image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#1F4E8C,#0B1730)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#E4C567" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <circle cx="60" cy="45" r="16"/><path d="M50 30l3-10M70 30l-3-10"/>
+            <rect x="30" y="82" width="18" height="14"/><rect x="51" y="74" width="18" height="22"/><rect x="72" y="86" width="18" height="10"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Award Ceremonies</span>
+      </div>
+
+      <div class="gallery-tile" data-caption="Group Activities" tabindex="0" role="button" aria-label="Open Group Activities image">
+        <div class="gallery-art" style="background:linear-gradient(155deg,#2C5AA0,#12234A)">
+          <svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0" stroke="#E4C567" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <circle cx="45" cy="55" r="12"/><circle cx="75" cy="55" r="12"/><circle cx="60" cy="40" r="12"/>
+            <path d="M28 90c4-10 12-15 17-15M92 90c-4-10-12-15-17-15M43 90c3-9 9-14 17-14"/>
+          </svg>
+        </div>
+        <span class="gallery-zoom"><svg viewBox="0 0 24 24"><use href="#icon-target"></use></svg></span>
+        <span class="gallery-caption">Group Activities</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section class="section section-dark admissions" id="admissions">
+  <canvas class="starfield" aria-hidden="true"></canvas>
+  <div class="container admissions-inner" data-reveal>
+    <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-star"></use></svg>Admissions</span>
+    <h2>Ready to Begin Your Journey?</h2>
+    <p>Take the first step toward academic excellence.</p>
+    <div class="h-ctas">
+      <button class="btn btn-gold" data-open-admission>Apply Now</button>
+      <a href="#contact" class="btn btn-outline">Contact Admissions</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow-mark"><svg viewBox="0 0 24 24"><use href="#icon-pin"></use></svg>Get In Touch</span>
+      <h2>Visit Stars Academy</h2>
+    </div>
+    <div class="contact-grid">
+      <div data-reveal>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><use href="#icon-pin"></use></svg></div>
+            <div><h4>Address<span class="sample-note">Sample data</span></h4><p>45-C, Block E1, Gulberg III, Lahore, Punjab, Pakistan</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><use href="#icon-phone"></use></svg></div>
+            <div><h4>Phone<span class="sample-note">Sample data</span></h4><p>+92 42 3587 2200 · +92 300 1234567</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><use href="#icon-mail"></use></svg></div>
+            <div><h4>Email<span class="sample-note">Sample data</span></h4><p>info@starsacademy.edu.pk</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><use href="#icon-clock"></use></svg></div>
+            <div><h4>Opening Hours</h4><p>Mon – Sat, 8:00 AM – 6:00 PM · Sunday Closed</p></div>
+          </div>
+        </div>
+        <div class="map-art" aria-hidden="true">
+          <svg viewBox="0 0 400 300" width="100%" height="100%" style="display:block">
+            <rect width="400" height="300" fill="var(--navy-900)"/>
+            <g stroke="rgba(228,197,103,.35)" stroke-width="1">
+              <line x1="0" y1="60" x2="400" y2="50"/><line x1="0" y1="140" x2="400" y2="150"/><line x1="0" y1="230" x2="400" y2="220"/>
+              <line x1="90" y1="0" x2="70" y2="300"/><line x1="230" y1="0" x2="250" y2="300"/><line x1="330" y1="0" x2="340" y2="300"/>
+            </g>
+            <g fill="rgba(228,197,103,.12)"><rect x="110" y="65" width="70" height="70" rx="4"/><rect x="255" y="155" width="60" height="55" rx="4"/></g>
+            <g transform="translate(200 130)">
+              <path d="M0 34S-18 12-18 -2a18 18 0 0136 0C18 12 0 34 0 34z" fill="url(#goldGrad)"/>
+              <circle cx="0" cy="-2" r="7" fill="#0B1730"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="contact-form-card" data-reveal>
+        <h3>Send Us a Message</h3>
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="cName">Your Name</label>
+            <input type="text" id="cName" name="cName" required>
+            <span class="field-error"></span>
+          </div>
+          <div class="field">
+            <label for="cEmail">Email Address</label>
+            <input type="email" id="cEmail" name="cEmail" required>
+            <span class="field-error"></span>
+          </div>
+          <div class="field">
+            <label for="cMessage">Message</label>
+            <textarea id="cMessage" name="cMessage" rows="4" required></textarea>
+            <span class="field-error"></span>
+          </div>
+          <button type="submit" class="btn btn-navy btn-block">Send Message</button>
+          <p id="contactSuccess" role="status" style="display:none; margin-top:.9rem; font-size:.85rem; color:var(--gold-600); font-weight:700; text-align:center;">Thank you — this is a project demo, so no message was actually sent.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="brand" style="color:#fff;"><svg class="brand-mark" viewBox="0 0 24 24"><use href="#icon-logo"></use></svg> Stars Academy</a>
+        <p>Where dreams become achievements — a Pakistani academy for Matriculation, Intermediate, O/A-Level and Entry Test students.</p>
+        <p class="footer-urdu">خواب سے کامیابی تک</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Stars Academy on Facebook"><svg viewBox="0 0 24 24"><use href="#icon-fb"></use></svg></a>
+          <a href="#" aria-label="Stars Academy on Instagram"><svg viewBox="0 0 24 24"><use href="#icon-instagram"></use></svg></a>
+          <a href="#" aria-label="Stars Academy on YouTube"><svg viewBox="0 0 24 24"><use href="#icon-youtube"></use></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <div class="footer-links">
+          <a href="#about">About</a><a href="#programs">Programs</a><a href="#faculty">Faculty</a><a href="#gallery">Campus Life</a>
+        </div>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <div class="footer-links">
+          <a href="#programs">Matriculation</a><a href="#programs">Intermediate</a><a href="#programs">O-Level</a><a href="#programs">A-Level</a>
+        </div>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="#contact">45-C, Gulberg III, Lahore</a><a href="#contact">+92 42 3587 2200</a><a href="#contact">info@starsacademy.edu.pk</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stars Academy. Fictional academy created for a school project — all names, results and contact details are sample data.</span>
+      <span>Made with ⭐ in Pakistan</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><use href="#icon-chevron-down"></use><g transform="rotate(180 12 12)"><use href="#icon-chevron-down"></use></g></svg></button>
+
+<!-- ADMISSION MODAL -->
+<div class="modal-overlay" id="admissionModal" role="dialog" aria-modal="true" aria-labelledby="admissionTitle">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-box">
+    <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24"><use href="#icon-close"></use></svg></button>
+    <h3 class="modal-title" id="admissionTitle">Admission Application</h3>
+    <p class="modal-meta">Stars Academy · New Session</p>
+    <form class="admission-form" id="admissionForm" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="aStudent">Student Name</label>
+          <input type="text" id="aStudent" name="studentName" required>
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="aParent">Parent/Guardian Name</label>
+          <input type="text" id="aParent" name="parentName" required>
+          <span class="field-error"></span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="aEmail">Email</label>
+          <input type="email" id="aEmail" name="email" required>
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="aPhone">Phone Number</label>
+          <input type="tel" id="aPhone" name="phone" required placeholder="+92 3XX XXXXXXX">
+          <span class="field-error"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="aProgram">Class / Program</label>
+        <select id="aProgram" name="program" required>
+          <option value="">Select a program</option>
+          <option>Matriculation</option>
+          <option>Intermediate</option>
+          <option>Entry Test Preparation</option>
+          <option>O-Level</option>
+          <option>A-Level</option>
+        </select>
+        <span class="field-error"></span>
+      </div>
+      <div class="field">
+        <label for="aSchool">Previous School</label>
+        <input type="text" id="aSchool" name="prevSchool" required>
+        <span class="field-error"></span>
+      </div>
+      <div class="field">
+        <label for="aMessage">Message <span style="font-weight:400; color:var(--text-soft);">(optional)</span></label>
+        <textarea id="aMessage" name="message" rows="3"></textarea>
+        <span class="field-error"></span>
+      </div>
+      <button type="submit" class="btn btn-gold btn-block">Submit Application</button>
+      <p style="font-size:.76rem; color:var(--text-soft); text-align:center; margin-top:.8rem;">This is a school-project demo — applications are not actually transmitted or stored anywhere.</p>
+    </form>
+    <div class="admission-success" hidden>
+      <svg class="success-check" viewBox="0 0 60 60"><circle cx="30" cy="30" r="26"/><path d="M18 31l8 8 16-18"/></svg>
+      <h3>Thank you, <span class="success-name">Student</span>!</h3>
+      <p style="color:var(--text-muted); font-size:.92rem;">Your demo application has been received. Our admissions team would reach out within 2 working days.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS / CONTENT MODAL -->
+<div class="modal-overlay" id="contentModal" role="dialog" aria-modal="true" aria-labelledby="contentModalTitle">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-box">
+    <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24"><use href="#icon-close"></use></svg></button>
+    <h3 class="modal-title" id="contentModalTitle"></h3>
+    <p class="modal-meta"></p>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="modal-overlay lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Campus photo viewer">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-box">
+    <button class="modal-close" data-modal-close aria-label="Close"><svg viewBox="0 0 24 24"><use href="#icon-close"></use></svg></button>
+    <div class="lightbox-body"></div>
+    <div class="lightbox-caption"></div>
+    <div class="lightbox-nav">
+      <button class="icon-btn lightbox-prev" aria-label="Previous image"><svg viewBox="0 0 24 24"><use href="#icon-chevron-left"></use></svg></button>
+      <button class="icon-btn lightbox-next" aria-label="Next image"><svg viewBox="0 0 24 24"><use href="#icon-chevron-right"></use></svg></button>
+    </div>
+  </div>
 </div>
 
 <script>
+(function(){
+  'use strict';
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  if(prefersReduced){ root.classList.add('reduce-motion'); }
 
-const cursor=document.getElementById("cursor");
+  /* ---------- Loader ---------- */
+  window.addEventListener('load', function(){
+    var loader = document.querySelector('.loader');
+    setTimeout(function(){
+      loader.classList.add('is-hidden');
+      setTimeout(function(){ if(loader && loader.parentNode){ loader.parentNode.removeChild(loader); } }, 700);
+    }, 350);
+  });
 
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
-});
+  /* ---------- Theme ---------- */
+  var themeBtns = document.querySelectorAll('[data-theme-toggle]');
+  function getStored(){ try{ return localStorage.getItem('stars-academy-theme'); }catch(e){ return null; } }
+  function setStored(v){ try{ localStorage.setItem('stars-academy-theme', v); }catch(e){} }
+  function effectiveTheme(){
+    var explicit = root.getAttribute('data-theme');
+    if(explicit){ return explicit; }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function syncThemeBtns(){
+    var t = effectiveTheme();
+    themeBtns.forEach(function(btn){
+      btn.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+      btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    });
+  }
+  var stored = getStored();
+  if(stored === 'dark' || stored === 'light'){ root.setAttribute('data-theme', stored); }
+  syncThemeBtns();
+  themeBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      setStored(next);
+      syncThemeBtns();
+    });
+  });
 
-const canvas=document.getElementById("stars");
-const ctx=canvas.getContext("2d");
+  /* ---------- Navbar scroll + back to top ---------- */
+  var navbar = document.getElementById('navbar');
+  var backToTop = document.getElementById('backToTop');
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    navbar.classList.toggle('is-scrolled', y > 24);
+    backToTop.classList.toggle('is-visible', y > 480);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  backToTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior: prefersReduced ? 'auto' : 'smooth'});
+  });
 
-canvas.width=innerWidth;
-canvas.height=innerHeight;
+  /* ---------- Mobile menu ---------- */
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var mobileBackdrop = document.getElementById('mobileBackdrop');
+  var mobileClose = document.getElementById('mobileCloseBtn');
+  function openMenu(){
+    mobileMenu.classList.add('is-open'); mobileBackdrop.classList.add('is-open');
+    hamburger.setAttribute('aria-expanded','true'); document.body.classList.add('no-scroll');
+  }
+  function closeMenu(){
+    mobileMenu.classList.remove('is-open'); mobileBackdrop.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll');
+  }
+  hamburger.addEventListener('click', function(){
+    mobileMenu.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+  mobileBackdrop.addEventListener('click', closeMenu);
+  mobileClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-menu .nav-link').forEach(function(l){ l.addEventListener('click', closeMenu); });
 
-let stars=[];
+  /* ---------- Active nav link on scroll ---------- */
+  var sections = document.querySelectorAll('main section[id]');
+  var navLinks = document.querySelectorAll('.nav-link');
+  if('IntersectionObserver' in window){
+    var sectionObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var id = entry.target.id;
+          navLinks.forEach(function(link){
+            link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(s){ sectionObserver.observe(s); });
+  }
 
-for(let i=0;i<250;i++){
-stars.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2,
-s:Math.random()*2+1
-});
-}
+  /* ---------- Scroll reveal ---------- */
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if('IntersectionObserver' in window){
+    var revealObserver = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
 
-function animate(){
+  /* ---------- Animated counters ---------- */
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(prefersReduced){ el.textContent = target.toLocaleString() + suffix; return; }
+    var dur = 1600, start = null;
+    function tick(ts){
+      if(start === null){ start = ts; }
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+      if(p < 1){ requestAnimationFrame(tick); }
+    }
+    requestAnimationFrame(tick);
+  }
+  var statEls = document.querySelectorAll('[data-count]');
+  if('IntersectionObserver' in window){
+    var statObserver = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ animateCount(entry.target); obs.unobserve(entry.target); }
+      });
+    }, {threshold:0.6});
+    statEls.forEach(function(el){ statObserver.observe(el); });
+  }
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+  /* ---------- Button ripple ---------- */
+  document.querySelectorAll('.btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      var rect = this.getBoundingClientRect();
+      var ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      var size = Math.max(rect.width, rect.height) * 1.6;
+      ripple.style.width = ripple.style.height = size + 'px';
+      var x = (e.clientX || rect.left + rect.width/2) - rect.left - size/2;
+      var y = (e.clientY || rect.top + rect.height/2) - rect.top - size/2;
+      ripple.style.left = x + 'px'; ripple.style.top = y + 'px';
+      this.appendChild(ripple);
+      ripple.addEventListener('animationend', function(){ ripple.remove(); });
+    });
+  });
 
-ctx.fillStyle="white";
+  /* ---------- Program "Learn More" toggles ---------- */
+  document.querySelectorAll('.program-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      panel.classList.toggle('is-open', !isOpen);
+      btn.querySelector('.program-toggle-label').textContent = isOpen ? 'Learn More' : 'Show Less';
+    });
+  });
 
-for(let s of stars){
+  /* ---------- Testimonial carousel ---------- */
+  (function(){
+    var track = document.querySelector('.testimonial-track');
+    var slides = document.querySelectorAll('.testimonial-slide');
+    var dotsWrap = document.querySelector('.testimonial-dots');
+    var carousel = document.querySelector('.testimonial-carousel');
+    if(!track || !slides.length) return;
+    var idx = 0, timer;
+    slides.forEach(function(_, i){
+      var dot = document.createElement('button');
+      dot.className = 'dot';
+      dot.setAttribute('aria-label', 'Go to testimonial ' + (i+1));
+      dot.addEventListener('click', function(){ goTo(i); });
+      dotsWrap.appendChild(dot);
+    });
+    var dots = dotsWrap.querySelectorAll('.dot');
+    function update(){
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      dots.forEach(function(d,i){ d.classList.toggle('is-active', i === idx); });
+    }
+    function goTo(i){ idx = (i + slides.length) % slides.length; update(); restart(); }
+    function restart(){
+      clearInterval(timer);
+      if(!prefersReduced){ timer = setInterval(function(){ goTo(idx+1); }, 6000); }
+    }
+    document.querySelector('.testimonial-next').addEventListener('click', function(){ goTo(idx+1); });
+    document.querySelector('.testimonial-prev').addEventListener('click', function(){ goTo(idx-1); });
+    carousel.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    carousel.addEventListener('mouseleave', restart);
+    carousel.addEventListener('focusin', function(){ clearInterval(timer); });
+    carousel.addEventListener('focusout', restart);
+    update(); restart();
+  })();
 
-ctx.beginPath();
-ctx.arc(s.x,s.y,s.r,0,6.28);
-ctx.fill();
+  /* ---------- Generic modal helpers ---------- */
+  function openModal(modal){
+    modal.classList.add('is-open');
+    document.body.classList.add('no-scroll');
+    var closeBtn = modal.querySelector('.modal-close');
+    if(closeBtn){ closeBtn.focus(); }
+  }
+  function closeModal(modal){
+    modal.classList.remove('is-open');
+    document.body.classList.remove('no-scroll');
+  }
+  document.addEventListener('click', function(e){
+    if(e.target.closest('[data-modal-close]')){
+      var overlay = e.target.closest('.modal-overlay');
+      if(overlay){ closeModal(overlay); }
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.modal-overlay.is-open').forEach(function(m){ closeModal(m); });
+    }
+  });
 
-s.y+=s.s;
+  /* ---------- Admission modal + form ---------- */
+  var admissionModal = document.getElementById('admissionModal');
+  document.querySelectorAll('[data-open-admission]').forEach(function(btn){
+    btn.addEventListener('click', function(){ openModal(admissionModal); });
+  });
+  var admissionForm = document.getElementById('admissionForm');
+  var admissionSuccess = document.querySelector('.admission-success');
+  admissionForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var valid = true;
+    var fields = admissionForm.querySelectorAll('[required]');
+    fields.forEach(function(f){
+      var errorEl = f.closest('.field').querySelector('.field-error');
+      var msg = '';
+      if(!f.value || !f.value.trim()){
+        msg = 'This field is required.';
+      } else if(f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value)){
+        msg = 'Enter a valid email address.';
+      } else if(f.type === 'tel' && !/^[0-9+\-\s]{7,16}$/.test(f.value)){
+        msg = 'Enter a valid phone number.';
+      }
+      if(msg){ valid = false; f.classList.add('has-error'); errorEl.textContent = msg; }
+      else { f.classList.remove('has-error'); errorEl.textContent = ''; }
+    });
+    if(!valid) return;
+    var firstName = (admissionForm.studentName.value || 'Student').trim().split(' ')[0];
+    admissionForm.hidden = true;
+    admissionSuccess.hidden = false;
+    admissionSuccess.querySelector('.success-name').textContent = firstName;
+    setTimeout(function(){
+      closeModal(admissionModal);
+      setTimeout(function(){
+        admissionForm.reset();
+        admissionForm.hidden = false;
+        admissionSuccess.hidden = true;
+        admissionForm.querySelectorAll('.has-error').forEach(function(f){ f.classList.remove('has-error'); });
+        admissionForm.querySelectorAll('.field-error').forEach(function(el){ el.textContent = ''; });
+      }, 400);
+    }, 3200);
+  });
+  admissionForm.querySelectorAll('input,select,textarea').forEach(function(f){
+    f.addEventListener('input', function(){ f.classList.remove('has-error'); f.closest('.field').querySelector('.field-error').textContent = ''; });
+  });
 
-if(s.y>canvas.height){
-s.y=0;
-s.x=Math.random()*canvas.width;
-}
+  /* ---------- News read-more modal ---------- */
+  var contentModal = document.getElementById('contentModal');
+  document.querySelectorAll('[data-open-news]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      contentModal.querySelector('.modal-title').textContent = btn.getAttribute('data-title') || '';
+      contentModal.querySelector('.modal-meta').textContent = btn.getAttribute('data-meta') || '';
+      var bodyEl = contentModal.querySelector('.modal-body');
+      bodyEl.innerHTML = '';
+      var p = document.createElement('p');
+      p.textContent = btn.getAttribute('data-body') || '';
+      bodyEl.appendChild(p);
+      openModal(contentModal);
+    });
+  });
 
-}
+  /* ---------- Gallery lightbox ---------- */
+  var galleryItems = document.querySelectorAll('.gallery-tile');
+  var lightbox = document.getElementById('lightbox');
+  var lightboxBody = lightbox.querySelector('.lightbox-body');
+  var lightboxCaption = lightbox.querySelector('.lightbox-caption');
+  var lbIndex = 0;
+  function renderLightbox(){
+    var item = galleryItems[lbIndex];
+    lightboxBody.innerHTML = item.querySelector('.gallery-art').innerHTML;
+    lightboxCaption.textContent = item.getAttribute('data-caption') || '';
+  }
+  function openLightbox(i){ lbIndex = i; renderLightbox(); openModal(lightbox); }
+  galleryItems.forEach(function(item, i){
+    item.addEventListener('click', function(){ openLightbox(i); });
+    item.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(i); }
+    });
+  });
+  lightbox.querySelector('.lightbox-next').addEventListener('click', function(){
+    lbIndex = (lbIndex + 1) % galleryItems.length; renderLightbox();
+  });
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', function(){
+    lbIndex = (lbIndex - 1 + galleryItems.length) % galleryItems.length; renderLightbox();
+  });
+  document.addEventListener('keydown', function(e){
+    if(!lightbox.classList.contains('is-open')) return;
+    if(e.key === 'ArrowRight'){ lightbox.querySelector('.lightbox-next').click(); }
+    if(e.key === 'ArrowLeft'){ lightbox.querySelector('.lightbox-prev').click(); }
+  });
 
-requestAnimationFrame(animate);
+  /* ---------- Contact mini form ---------- */
+  var contactForm = document.getElementById('contactForm');
+  var contactSuccess = document.getElementById('contactSuccess');
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var valid = true;
+    contactForm.querySelectorAll('[required]').forEach(function(f){
+      var errorEl = f.closest('.field').querySelector('.field-error');
+      var msg = '';
+      if(!f.value || !f.value.trim()){ msg = 'This field is required.'; }
+      else if(f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value)){ msg = 'Enter a valid email address.'; }
+      if(msg){ valid = false; f.classList.add('has-error'); errorEl.textContent = msg; }
+      else { f.classList.remove('has-error'); errorEl.textContent = ''; }
+    });
+    if(!valid) return;
+    contactSuccess.style.display = 'block';
+    contactForm.reset();
+    setTimeout(function(){ contactSuccess.style.display = 'none'; }, 5000);
+  });
+  contactForm.querySelectorAll('input,textarea').forEach(function(f){
+    f.addEventListener('input', function(){ f.classList.remove('has-error'); f.closest('.field').querySelector('.field-error').textContent = ''; });
+  });
 
-}
+  /* ---------- Starfield canvas ---------- */
+  function initStarfield(canvas){
+    var ctx = canvas.getContext('2d');
+    var w, h, stars = [];
+    function resize(){
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      var dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, w * dpr); canvas.height = Math.max(1, h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var count = Math.min(Math.round((w * h) / 9000), 140);
+      stars = [];
+      for(var i=0;i<count;i++){
+        stars.push({
+          x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.3+0.35,
+          p: Math.random()*Math.PI*2, s: Math.random()*0.02+0.008
+        });
+      }
+    }
+    function draw(t){
+      ctx.clearRect(0,0,w,h);
+      for(var i=0;i<stars.length;i++){
+        var st = stars[i];
+        var alpha = 0.35 + Math.sin(t*st.s + st.p)*0.35 + 0.25;
+        alpha = Math.max(0, Math.min(1, alpha));
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(228,197,103,' + alpha + ')';
+        ctx.fill();
+      }
+      if(!prefersReduced){ requestAnimationFrame(draw); }
+    }
+    window.addEventListener('resize', resize, {passive:true});
+    resize();
+    requestAnimationFrame(draw);
+  }
+  document.querySelectorAll('.starfield').forEach(function(c){ initStarfield(c); });
 
-animate();
-
-let score=0;
-
-function power(){
-
-score++;
-
-document.getElementById("score").textContent=score;
-
-for(let i=0;i<30;i++){
-
-let goat=document.createElement("div");
-
-goat.className="goat";
-
-goat.innerHTML=["🐐","⭐","🔥","⚡","✨","💥"][Math.floor(Math.random()*6)];
-
-goat.style.left=Math.random()*window.innerWidth+"px";
-
-document.body.appendChild(goat);
-
-setTimeout(()=>goat.remove(),5000);
-
-}
-
-document.body.style.boxShadow="0 0 200px white inset";
-
-setTimeout(()=>{
-document.body.style.boxShadow="";
-},200);
-
-}
-
-document.addEventListener("click",e=>{
-
-for(let i=0;i<40;i++){
-
-let spark=document.createElement("div");
-
-spark.className="spark";
-
-spark.style.left=e.clientX+"px";
-
-spark.style.top=e.clientY+"px";
-
-spark.style.setProperty("--x",(Math.random()-0.5)*300+"px");
-
-spark.style.setProperty("--y",(Math.random()-0.5)*300+"px");
-
-spark.style.background=`hsl(${Math.random()*360},100%,70%)`;
-
-document.body.appendChild(spark);
-
-setTimeout(()=>spark.remove(),800);
-
-}
-
-});
-
-window.onresize=()=>{
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-};
-
+})();
 </script>
-
 </body>
 </html>
